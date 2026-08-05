@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette extracted from the ReinoUp mockups */
+  --color-cream: #fbf3e4;
+  --color-cream-dark: #f3e6cd;
+  --color-navy: #1b3a6b;
+  --color-navy-deep: #152f57;
+  --color-navy-light: #2a4d84;
+  --color-orange: #f5900f;
+  --color-orange-light: #ffb648;
+  --color-orange-dark: #d97706;
+  --color-gold: #f0a300;
+  --color-gold-light: #ffd873;
+  --color-green: #4caf50;
+  --color-green-light: #dff2e1;
+  --color-green-dark: #2e7d32;
+  --color-blue-sky: #4a90d9;
+  --color-red-soft: #e0654c;
+
+  --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
+
+  --radius-card: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 8px 24px -8px rgba(27, 58, 107, 0.25);
+  --shadow-card: 0 4px 14px -4px rgba(27, 58, 107, 0.15);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--color-cream);
+    color: var(--color-navy-deep);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background: var(--color-orange-light);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

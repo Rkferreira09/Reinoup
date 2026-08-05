@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(cp \"c:\\\\Users\\\\user\\\\Desktop\\\\APP-RAMON\\\\app\\\\assets-src\\\\icon-mark.svg\" \"c:\\\\Users\\\\user\\\\Desktop\\\\APP-RAMON\\\\app\\\\public\\\\favicon.svg\")",
+      "Bash(node scripts/generate-icons.mjs)",
+      "Bash(rm -f App.css assets/react.svg)",
+      "Bash(rmdir assets *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+📖 BLOCO 1 — CONTEÚDO (o que a criança aprende)
+1. Histórias bíblicas interativas
+Descrição curta (pronta pra loja/landing):
+
+Histórias da Bíblia que a criança não só assiste — ela participa. Toca, escolhe e descobre cada passagem no ritmo dela.
+
+Como funciona:
+
+Narração em áudio com texto acompanhando (essencial: 5 anos ainda não lê sozinho, 10 anos já lê — a mesma tela serve os dois).
+Elementos tocáveis na cena: tocar na arca faz o animal aparecer, tocar no mar de Juncos abre as águas. Micro-recompensa a cada toque.
+Pontos de escolha: "O que Davi vai fazer?" — a criança escolhe, o app mostra o que a Bíblia conta de verdade e explica a diferença sem julgar.
+Cada história dividida em capítulos de 2–3 min. História longa (José, Moisés) vira sequência de fases na trilha.
+Fecha sempre com uma pergunta de aplicação: "E você, quando alguém te faz mal, o que faz?"
+Por que prende: interatividade transforma consumo passivo em agência. E o corte em capítulos cria o gancho de "amanhã eu descubro o que acontece com o José".
+
+2. Versículo do dia
+Descrição curta:
+
+Um versículo por dia, na linguagem da criança, com uma explicação de 20 segundos e um mini-desafio pra viver aquilo hoje.
+
+Como funciona:
+
+Um card ilustrado, texto curto, em versão simplificada para a idade da criança (o mesmo versículo tem redação diferente pra 5–7 e 8–10).
+Áudio do cordeirinho lendo em voz alta — a criança pode repetir junto.
+Botão "Decorei!": a criança grava a si mesma falando o versículo (só áudio, fica no aparelho) ou monta o versículo arrastando palavras embaralhadas.
+Versículos ficam salvos numa estante de versículos — coleção visível que cresce. Colecionar é o que faz criança voltar.
+Opção de compartilhar o card com os pais no WhatsApp (ação do pai, não da criança).
+Por que prende: é a menor unidade de valor do app. Nos dias em que a criança tem 90 segundos, ela ainda assim "fez o dia" — e não quebra a ofensiva.
+
+3. Quiz
+Descrição curta:
+
+Perguntas rápidas depois de cada história, pra criança perceber sozinha o quanto já sabe.
+
+Como funciona:
+
+5 a 8 perguntas por lição, formatos variados: múltipla escolha ilustrada, verdadeiro/falso, ordenar acontecimentos, ligar personagem à história, completar o versículo.
+Erro nunca é punido — sem "X" vermelho, sem perda de vida. Errou, o cordeirinho explica a resposta certa e a pergunta volta no fim.
+Feedback imediato com som e animação em cada acerto.
+Quiz de revisão semanal: recicla o que a criança errou nos últimos 7 dias (repetição espaçada — é o que faz o conteúdo grudar de verdade).
+Resultado vira dado no relatório dos pais.
+Por que prende: acerto é dopamina barata e honesta. E a regra "errar não dói" é o que impede a criança de abandonar o app — a maioria dos apps infantis erra exatamente aqui.
+
+🎮 BLOCO 2 — GAMIFICAÇÃO (o que faz voltar amanhã)
+4. Jogos
+Descrição curta:
+
+Minigames bíblicos que revisam o que a criança aprendeu — parece brincadeira, é revisão.
+
+Como funciona:
+Biblioteca de 5 a 8 mecânicas simples reutilizáveis, cada uma alimentada pelo conteúdo da lição:
+
+Memória bíblica — pares de personagens/objetos.
+Caça-palavras e quebra-cabeça da cena da história.
+Ordem certa — arrastar os dias da Criação, as pragas do Egito, a jornada de Paulo.
+Quem sou eu? — pistas até a criança acertar o personagem.
+Monte o versículo — palavras embaralhadas.
+Ache as diferenças entre duas versões da cena.
+Regras: partida de 60–90 segundos, sem timer estressante, sem "game over". Jogo só desbloqueia depois da lição — o jogo é a recompensa do estudo, nunca o atalho.
+
+Por que prende: dá variedade sem multiplicar o custo de produção. Mesma mecânica + conteúdo novo = jogo novo toda semana.
+
+5. Desafios diários
+Descrição curta:
+
+Uma missão nova todo dia — quando a criança completa, mantém a ofensiva e ganha o baú.
+
+Como funciona:
+
+3 tarefas por dia, dosadas pra caber em ~7 min: ex. "Ouça a história de hoje", "Acerte 4 do quiz", "Decore o versículo".
+Barra de XP do dia enchendo em tempo real (já prevista na UI).
+Ofensiva (streak) com contador visível: 3, 7, 14, 30 dias. Marcos maiores dão recompensa maior.
+Escudo de ofensiva: 1 folga por semana que a criança pode comprar com moedas. Sem isso, um dia perdido (viagem, doença) mata a motivação e o pai cancela a assinatura.
+Notificação suave no horário que o pai definir (ex.: 19h) — nunca fora do horário autorizado na Área dos Pais.
+Por que prende: é o motor do retorno diário. A ofensiva cria custo emocional em faltar — a criança não quer "perder" o que construiu.
+
+6. Missões
+Descrição curta:
+
+Jornadas maiores, de semanas, que dão à criança um objetivo além do dia de hoje.
+
+Como funciona:
+Diferença clara para Desafios: desafio = hoje; missão = arco longo.
+
+Missões de trilha: "Complete o livro de Gênesis", "Conheça os 12 discípulos".
+Missões temáticas: "Semana da Coragem" — 5 histórias sobre coragem.
+Missões de coleção: "Junte 10 versículos sobre amor".
+Missões da vida real (as mais fortes): "Ajude sua mãe hoje sem ela pedir", "Ore por um amigo" — a criança marca como feita e o pai confirma na Área dos Pais. Sai da tela e vira comportamento.
+Barra de progresso sempre visível na home, com a recompensa final mostrada desde o início.
+Por que prende: dá horizonte. Ofensiva segura o dia; missão segura o mês. E a missão da vida real é o argumento de venda que nenhum concorrente entrega direito.
+
+7. Sistema de moedas
+Descrição curta:
+
+Cada lição concluída vira moeda — e a criança decide o que fazer com o que conquistou.
+
+Como funciona:
+
+Moeda única (sugestão de nome: Coroas ou Sementes — combina com a trilha de coroas já desenhada).
+Ganha-se por: concluir lição, acertar quiz, fechar desafio do dia, marcos de ofensiva, missões.
+Gasta-se em: itens do avatar, temas/cenários, escudo de ofensiva, desbloquear jogo extra.
+Carteira visível no topo, com animação de moeda voando pra ela ao ganhar.
+Regra inegociável: moeda não se compra com dinheiro real, jamais. Nem com compra dentro do app. O único jeito de ganhar é aprendendo. Isso protege a confiança do pai — que é quem paga a assinatura — e te mantém longe de problema com as regras de app infantil das lojas.
+Por que prende: transforma esforço em posse. E poder escolher onde gastar dá à criança a sensação de controle.
+
+8. Recompensas
+Descrição curta:
+
+Baús, surpresas e conquistas que aparecem no caminho — sempre com um "e se..." pra criança querer o próximo.
+
+Como funciona:
+
+Baú diário: abre ao fechar os 3 desafios. Conteúdo variável (moedas, item de avatar, adesivo raro) — a variabilidade é o que faz a criança querer abrir.
+Baús na trilha: a cada 5 fases, marcados no mapa desde o começo (a criança vê o que vem antes de chegar).
+Cofre de marcos: 7 dias, 30 dias, fim de missão — recompensa grande e anunciada.
+Adesivos colecionáveis por história concluída, organizados num álbum. Álbum incompleto é um dos ganchos mais fortes que existe com criança.
+Toda recompensa entra com animação, som e o cordeirinho comemorando.
+Por que prende: a recompensa variável é o mecanismo mais poderoso de retorno que existe — mas aqui ela é sempre resultado de aprender, nunca de esperar ou de pagar.
+
+9. Medalhas
+Descrição curta:
+
+Conquistas permanentes que mostram o quanto a criança já caminhou.
+
+Como funciona:
+
+Medalhas de progresso: "Primeira história", "10 lições", "Antigo Testamento completo".
+Medalhas de constância: "7 dias seguidos", "30 dias seguidos", "3 meses de fé".
+Medalhas de domínio: "Quiz perfeito", "20 versículos decorados".
+Medalhas de caráter, ligadas às missões da vida real: "Coração generoso", "Amigo fiel".
+Medalhas secretas que só aparecem ao serem desbloqueadas.
+Ficam numa vitrine no perfil, com as bloqueadas em silhueta — ver o que falta é o que puxa.
+A medalha nova aparece também no relatório do pai, com o motivo.
+Por que prende: diferente da moeda (gasta e some), a medalha é identidade. "Eu sou a criança que tem 30 dias de ofensiva."
+
+10. Avatar personalizável
+Descrição curta:
+
+Cada criança monta seu próprio personagem e o veste com o que conquistou aprendendo.
+
+Como funciona:
+
+Base: rosto, tom de pele, cabelo, expressão. Depois roupas, acessórios, capa, chapéu, mochila, pet.
+Itens divididos em: gratuitos de entrada, comprados com moedas, e exclusivos de conquista (só quem terminou tal missão tem).
+Itens temáticos ligados às histórias: cajado de Moisés, funda de Davi, manto colorido de José.
+Cenário de fundo do perfil também personalizável.
+O avatar aparece na trilha, no ranking e nas telas de vitória — a criança vê a si mesma progredindo.
+Sem campo de texto livre no nome do avatar — só nomes de uma lista, ou o apelido que o pai definiu. Evita conteúdo impróprio e problema de moderação.
+Por que prende: é o vínculo emocional. Criança não abandona um personagem que é dela e que ela vestiu com o próprio esforço.
+
+👥 BLOCO 3 — SOCIAL
+11. Ranking entre amigos
+Descrição curta:
+
+A criança compara o progresso com os amigos da igreja ou da família — competição saudável, sem exposição.
+
+Como funciona:
+
+Círculo fechado: só entra por código de convite, e o pai aprova cada amizade na Área dos Pais. Sem busca de usuários, sem estranhos, sem chat livre. Nunca.
+Ranking semanal com reset toda segunda — quem ficou pra trás recomeça do zero e não desiste.
+Ordenado por XP da semana (esforço), não por total acumulado (que premiaria só quem entrou primeiro).
+Grupos pequenos: 5 a 15 crianças. Ranking com 200 nomes desmotiva.
+Interação limitada a reações prontas: 👏 ❤️ 🙌. Zero texto livre.
+Modo Turma: o professor de culto infantil cria um grupo pra sala inteira. (Aproveita direto o teu Método Sala Zero — é canal de aquisição, não só feature.)
+Por que prende: por volta dos 7 anos a comparação social vira motivador forte. E o Modo Turma faz uma criança trazer outras dez.
+
+👨‍👩‍👧 BLOCO 4 — PAIS (quem paga)
+12. Área dos pais
+Descrição curta:
+
+Um painel só seu, protegido, pra acompanhar, configurar e participar da caminhada do seu filho.
+
+Como funciona:
+
+Entrada protegida por PIN ou pergunta que criança pequena não responde. A criança não entra, não cancela, não compra.
+Controles: tempo diário de uso, horário permitido, horário da notificação, faixa etária do conteúdo, aprovação de amizades, aprovação de missões da vida real.
+Perfis múltiplos: vários filhos na mesma assinatura, cada um com trilha e progresso próprios.
+Kit do pai: para cada lição que o filho fez, uma pergunta pronta pra puxar conversa no jantar ("Pergunte pro Théo por que o José perdoou os irmãos").
+Devocional em família semanal: um roteiro de 10 min pra fazer juntos, offline.
+Gestão de assinatura, privacidade e exportação/exclusão de dados (obrigatório por LGPD, e é o que fecha a confiança).
+Por que importa: a criança usa, mas quem assina e quem cancela é o pai. Essa área é o produto dele — e é onde ele enxerga que os R$ 24,90 estão valendo.
+
+13. Relatórios de aprendizado
+Descrição curta:
+
+Um retrato claro do que seu filho aprendeu — não quanto tempo ficou na tela, mas o que ficou nele.
+
+Como funciona:
+
+Resumo semanal entregue por push/e-mail no domingo: dias ativos, lições feitas, versículos decorados, medalha nova.
+O que ele aprendeu: lista das histórias e temas em linguagem de pai — "Aprendeu sobre perdão com José", não "Módulo 3 concluído".
+Onde tem dificuldade: os pontos que o filho errou mais de uma vez, com sugestão de como conversar sobre aquilo.
+Trilha de valores: quais temas de caráter apareceram mais (coragem, obediência, gratidão) — o dado que nenhum concorrente entrega.
+Linha do tempo de evolução mês a mês.
+Certificado compartilhável ao fim de cada bloco, com o avatar do filho. O pai posta no Instagram → aquisição orgânica de graça.
+Por que importa: é a prova de valor. Relatório de tempo de tela dá culpa ao pai; relatório de aprendizado dá orgulho. Orgulho renova assinatura.
