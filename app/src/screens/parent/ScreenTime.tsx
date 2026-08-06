@@ -7,6 +7,8 @@ import { useSettingsStore, ALL_WEEKDAYS, type WeekdayCode } from '../../store/se
 const DAY_LABEL: Record<WeekdayCode, string> = { seg: 'Seg', ter: 'Ter', qua: 'Qua', qui: 'Qui', sex: 'Sex', sab: 'Sáb', dom: 'Dom' };
 
 export function ScreenTime() {
+  const screenTimeEnabled = useSettingsStore((s) => s.screenTimeEnabled);
+  const setScreenTimeEnabled = useSettingsStore((s) => s.setScreenTimeEnabled);
   const dailyTimeLimitMin = useSettingsStore((s) => s.dailyTimeLimitMin);
   const setDailyTimeLimit = useSettingsStore((s) => s.setDailyTimeLimit);
   const allowedFrom = useSettingsStore((s) => s.allowedFrom);
@@ -23,6 +25,20 @@ export function ScreenTime() {
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Tempo de uso" backTo="/pais" />
       <div className="flex flex-col gap-4 px-4">
+        <Card className="flex items-center justify-between">
+          <div>
+            <span className="font-display font-bold text-navy">Controle de tempo</span>
+            <p className="text-xs text-navy/50">Ative para aplicar limite diário, horários e dias permitidos.</p>
+          </div>
+          <button
+            onClick={() => setScreenTimeEnabled(!screenTimeEnabled)}
+            className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${screenTimeEnabled ? 'bg-green' : 'bg-navy/15'}`}
+          >
+            <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${screenTimeEnabled ? 'translate-x-5' : 'translate-x-0.5'}`} />
+          </button>
+        </Card>
+
+        <div className={`flex flex-col gap-4 transition-opacity ${screenTimeEnabled ? '' : 'pointer-events-none opacity-40'}`}>
         <Card>
           <p className="font-display mb-3 font-bold text-navy">Tempo diário permitido</p>
           <div className="flex items-center justify-between">
@@ -78,6 +94,7 @@ export function ScreenTime() {
             ))}
           </div>
         </Card>
+        </div>
 
         <Card className="flex items-center justify-between">
           <span className="font-display font-bold text-navy">Pausar o app agora</span>

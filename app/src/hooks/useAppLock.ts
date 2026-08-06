@@ -28,6 +28,9 @@ export function useAppLock(): AppLockState {
   return useMemo(() => {
     if (settings.pausedManually) return { locked: true, reason: 'paused' };
 
+    // Parental screen-time control is opt-in: no schedule lock until a parent enables it.
+    if (!settings.screenTimeEnabled) return { locked: false, reason: null };
+
     const dayCode = todayCode();
     if (!settings.allowedDays.includes(dayCode)) return { locked: true, reason: 'outside-hours' };
 
@@ -40,5 +43,5 @@ export function useAppLock(): AppLockState {
 
     return { locked: false, reason: null };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settings.pausedManually, settings.allowedDays, settings.allowedFrom, settings.allowedTo, settings.dailyTimeLimitMin, activityMinutes]);
+  }, [settings.pausedManually, settings.screenTimeEnabled, settings.allowedDays, settings.allowedFrom, settings.allowedTo, settings.dailyTimeLimitMin, activityMinutes]);
 }

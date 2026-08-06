@@ -23,6 +23,7 @@ export const ALL_WEEKDAYS: WeekdayCode[] = ['seg', 'ter', 'qua', 'qui', 'sex', '
 interface SettingsState {
   ageBand: AgeBand;
   contentToggles: ContentToggles;
+  screenTimeEnabled: boolean;
   dailyTimeLimitMin: number;
   allowedFrom: string;
   allowedTo: string;
@@ -34,6 +35,7 @@ interface SettingsState {
 
   setAgeBand: (b: AgeBand) => void;
   toggleContent: (key: keyof ContentToggles) => void;
+  setScreenTimeEnabled: (enabled: boolean) => void;
   setDailyTimeLimit: (min: number) => void;
   setAllowedHours: (from: string, to: string) => void;
   toggleWeekday: (day: WeekdayCode) => void;
@@ -53,6 +55,7 @@ export const useSettingsStore = create<SettingsState>()(
         versiculoDoDia: true,
         missoesVidaReal: true,
       },
+      screenTimeEnabled: false,
       dailyTimeLimitMin: 60,
       allowedFrom: '08:00',
       allowedTo: '20:00',
@@ -69,6 +72,7 @@ export const useSettingsStore = create<SettingsState>()(
 
       setAgeBand: (b) => set({ ageBand: b }),
       toggleContent: (key) => set((s) => ({ contentToggles: { ...s.contentToggles, [key]: !s.contentToggles[key] } })),
+      setScreenTimeEnabled: (enabled) => set({ screenTimeEnabled: enabled }),
       setDailyTimeLimit: (min) => set({ dailyTimeLimitMin: Math.max(10, Math.min(240, min)) }),
       setAllowedHours: (from, to) => set({ allowedFrom: from, allowedTo: to }),
       toggleWeekday: (day) =>
