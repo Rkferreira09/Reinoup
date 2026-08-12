@@ -1,31 +1,65 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette extracted from the ReinoUp mockups */
-  --color-cream: #fbf3e4;
-  --color-cream-dark: #f3e6cd;
-  --color-navy: #1b3a6b;
-  --color-navy-deep: #152f57;
-  --color-navy-light: #2a4d84;
-  --color-orange: #f5900f;
-  --color-orange-light: #ffb648;
-  --color-orange-dark: #d97706;
-  --color-gold: #f0a300;
-  --color-gold-light: #ffd873;
-  --color-green: #4caf50;
-  --color-green-light: #dff2e1;
-  --color-green-dark: #2e7d32;
-  --color-blue-sky: #4a90d9;
-  --color-red-soft: #e0654c;
+  /* ==========================================================
+   * Paleta oficial do brandbook ReinoUp.
+   * Não altere estes valores sem atualizar o brandbook.
+   * ========================================================== */
 
-  --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  /* Primárias */
+  --color-navy-deep: #14213d;
+  --color-navy: #1d4689;
+
+  /* Recompensa */
+  --color-yellow: #ffc93c;
+  --color-gold: #eba317;
+
+  /* Ação */
+  --color-orange: #ff7a29;
+  --color-orange-light: #ffa45c;
+
+  /* Neutros */
+  --color-cream: #fffbf0;
+  --color-cream-dark: #f3e9d7;
+  --color-sand: #f3e9d7;
+
+  /* Suporte */
+  --color-gray: #b8b8b8;
+  --color-gray-dark: #8e8e8e;
+
+  /* ----------------------------------------------------------
+   * Derivadas — não estão no brandbook. Existem porque a UI
+   * precisa de sombra 3D nos botões e de gradiente nas cenas.
+   * ---------------------------------------------------------- */
+  --color-navy-light: #2c5fa8;
+  --color-orange-dark: #d95e12;
+  --color-gold-light: #ffc93c;
+  --color-blue-sky: #3e7bc4;
+
+  /* ----------------------------------------------------------
+   * Semânticas — o brandbook não define acerto/erro/perigo.
+   * Regra do produto: errar NUNCA pune, então não existe
+   * vermelho de erro. O "vamos de novo" usa o azul da marca.
+   * Vermelho fica só para ação destrutiva de adulto
+   * (sair da conta, excluir dados) na Área dos Pais.
+   * Contrastes verificados em AA sobre o creme.
+   * ---------------------------------------------------------- */
+  --color-green: #218c5a;
+  --color-green-light: #e3f3ea;
+  --color-green-dark: #14603c;
+  --color-retry: #1d4689;
+  --color-retry-soft: #e8eef8;
+  --color-red-soft: #b8442f;
+
+  --font-display: "Baloo 2", system-ui, sans-serif;
+  /* Baloo 2 cansa em parágrafo longo; Nunito é a secundária oficial de corpo. */
   --font-body: "Nunito", system-ui, sans-serif;
 
   --radius-card: 1.5rem;
   --radius-pill: 999px;
 
-  --shadow-soft: 0 8px 24px -8px rgba(27, 58, 107, 0.25);
-  --shadow-card: 0 4px 14px -4px rgba(27, 58, 107, 0.15);
+  --shadow-soft: 0 8px 24px -8px rgba(20, 33, 61, 0.25);
+  --shadow-card: 0 4px 14px -4px rgba(20, 33, 61, 0.15);
 }
 
 @layer base {

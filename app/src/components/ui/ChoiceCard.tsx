@@ -13,7 +13,8 @@ interface ChoiceCardProps {
 export function ChoiceCard({ children, selected, correct, revealed, onClick, disabled }: ChoiceCardProps) {
   let stateClasses = 'border-navy/10 bg-white';
   if (revealed && selected && correct) stateClasses = 'border-green bg-green-light';
-  else if (revealed && selected && !correct) stateClasses = 'border-red-soft bg-red-soft/10';
+  // Errar não pune: sem vermelho, sem alarme. Azul da marca = "vamos de novo".
+  else if (revealed && selected && !correct) stateClasses = 'border-retry bg-retry-soft';
   else if (selected) stateClasses = 'border-orange bg-orange-light/20';
 
   return (

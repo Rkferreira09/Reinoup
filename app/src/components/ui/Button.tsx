@@ -16,7 +16,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   secondary: 'bg-white text-navy border-2 border-navy/15 shadow-[0_4px_0_0_rgba(27,58,107,0.12)] active:shadow-none',
   ghost: 'bg-transparent text-navy',
   success: 'bg-green text-white shadow-[0_6px_0_0_var(--color-green-dark)] active:shadow-none',
-  danger: 'bg-red-soft text-white shadow-[0_6px_0_0_#a83f2b] active:shadow-none',
+  danger: 'bg-red-soft text-white shadow-[0_6px_0_0_#8e3323] active:shadow-none',
 };
 
 const SIZE_CLASSES = {
