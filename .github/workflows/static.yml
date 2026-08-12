@@ -40,7 +40,7 @@ jobs:
         env:
           # GitHub Pages serve o app em /<repo>/ — sem isso, os assets 404.
           BASE_PATH: /${{ github.event.repository.name }}/
-        run: bun run build
+        run: bun run build:fast
 
       - name: SPA fallback
         # O Pages não tem reescrita de rota: copiar index.html para 404.html
