@@ -99,4 +99,7 @@ export const router = createBrowserRouter([
       { path: 'configuracoes', element: <Settings /> },
     ],
   },
-]);
+], {
+  // Acompanha o `base` do Vite: '/' em domínio próprio, '/Reinoup/' no GitHub Pages.
+  basename: import.meta.env.BASE_URL,
+});

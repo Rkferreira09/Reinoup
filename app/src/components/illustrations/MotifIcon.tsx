@@ -272,4 +272,136 @@ const RENDERERS: Record<Motif, () => React.ReactNode> = {
       <ellipse cx="40" cy="40" rx="22" ry="6" fill="#D9A96A" />
     </>
   ),
+
+  // ============================================================
+  // Motivos de Gênesis
+  // ============================================================
+  serpent: () => (
+    <>
+      <path
+        d="M22 62 Q40 62 40 48 Q40 34 52 34 Q62 34 62 24"
+        stroke="#4E8B4A"
+        strokeWidth="9"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="62" cy="22" r="7" fill="#5FA455" />
+      <circle cx="64" cy="20" r="1.8" fill="#14213D" />
+      <path d="M69 22 L76 19 M69 22 L76 25" stroke="#C0392B" strokeWidth="2" strokeLinecap="round" />
+    </>
+  ),
+  'fruit-tree': () => (
+    <>
+      <rect x="36" y="42" width="8" height="24" rx="2" fill={brown} />
+      <circle cx="40" cy="32" r="20" fill="#4E8B4A" />
+      <circle cx="30" cy="30" r="4" fill="#D64545" />
+      <circle cx="48" cy="26" r="4" fill="#D64545" />
+      <circle cx="42" cy="40" r="4" fill="#D64545" />
+    </>
+  ),
+  garden: () => (
+    <>
+      <rect x="10" y="54" width="60" height="14" rx="4" fill="#5FA455" />
+      <rect x="34" y="38" width="6" height="18" rx="2" fill={brown} />
+      <circle cx="37" cy="32" r="13" fill="#4E8B4A" />
+      <circle cx="18" cy="50" r="5" fill="#F2A0C0" />
+      <circle cx="62" cy="48" r="6" fill="#7FC4E8" />
+      <circle cx="55" cy="54" r="4" fill={gold} />
+    </>
+  ),
+  tower: () => (
+    <>
+      <path d="M28 66 L32 22 H48 L52 66Z" fill="#D9C48C" />
+      <path d="M30 54 H50 M31 44 H49 M32 34 H48" stroke="#B07C42" strokeWidth="2" />
+      <rect x="30" y="16" width="20" height="7" rx="2" fill="#B07C42" />
+      <path d="M22 66 H58" stroke="#8a5a2b" strokeWidth="3" strokeLinecap="round" />
+    </>
+  ),
+  altar: () => (
+    <>
+      <rect x="20" y="44" width="40" height="22" rx="3" fill="#9E9E9E" />
+      <path d="M20 44 H60 M26 54 H54" stroke="#7A7A7A" strokeWidth="2" />
+      <path d="M40 20 Q46 30 40 40 Q34 30 40 20Z" fill={gold} />
+      <path d="M40 26 Q43 32 40 38 Q37 32 40 26Z" fill="#FFE08A" />
+    </>
+  ),
+  ram: () => (
+    <>
+      <ellipse cx="42" cy="46" rx="20" ry="14" fill={cream} stroke="#E7D8B8" strokeWidth="2" />
+      <circle cx="22" cy="40" r="9" fill="#EFE2C6" />
+      <path d="M16 36 Q8 40 14 46 Q20 48 20 42" fill="none" stroke={brown} strokeWidth="4" strokeLinecap="round" />
+      <circle cx="20" cy="39" r="1.8" fill="#14213D" />
+      <path d="M32 58 V66 M52 58 V66" stroke={brown} strokeWidth="4" strokeLinecap="round" />
+    </>
+  ),
+  camel: () => (
+    <>
+      <path d="M18 52 Q24 34 32 44 Q40 30 48 44 Q56 36 60 52Z" fill="#C79256" />
+      <rect x="22" y="50" width="5" height="16" rx="2" fill="#B07C42" />
+      <rect x="52" y="50" width="5" height="16" rx="2" fill="#B07C42" />
+      <path d="M60 50 Q66 46 64 34" stroke="#C79256" strokeWidth="7" strokeLinecap="round" fill="none" />
+      <circle cx="64" cy="30" r="6" fill="#C79256" />
+      <circle cx="66" cy="28" r="1.6" fill="#14213D" />
+    </>
+  ),
+  cistern: () => (
+    <>
+      <path d="M22 26 L28 66 H52 L58 26Z" fill="#6B5637" />
+      <ellipse cx="40" cy="26" rx="18" ry="6" fill="#3E3020" />
+      <path d="M30 48 Q40 44 50 48" stroke="#8a6b4a" strokeWidth="2" fill="none" />
+      <path d="M32 58 Q40 54 48 58" stroke="#8a6b4a" strokeWidth="2" fill="none" />
+    </>
+  ),
+  cup: () => (
+    <>
+      <path d="M26 20 H54 L50 40 Q40 48 30 40Z" fill={gold} />
+      <rect x="37" y="46" width="6" height="12" fill="#D99A00" />
+      <ellipse cx="40" cy="62" rx="14" ry="5" fill={gold} />
+      <ellipse cx="40" cy="22" rx="14" ry="4" fill="#FFE08A" />
+    </>
+  ),
+  'stone-pillow': () => (
+    <>
+      <path d="M18 58 Q22 40 40 42 Q60 44 62 58 Z" fill="#A8A29A" />
+      <path d="M18 58 H62 Q60 66 40 66 Q20 66 18 58Z" fill="#8C867E" />
+      <path d="M28 52 Q34 48 42 50" stroke="#C4BEB4" strokeWidth="2" fill="none" />
+    </>
+  ),
+  'ladder-angels': () => (
+    <>
+      <path d="M28 68 L36 14 M48 68 L52 14" stroke={brown} strokeWidth="4" strokeLinecap="round" />
+      <path d="M31 56 H50 M33 44 H51 M35 32 H52 M37 20 H53" stroke={brown} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="20" cy="30" r="5" fill="#FFE08A" />
+      <path d="M14 30 Q20 22 26 30" fill="#FFF3C4" />
+      <circle cx="62" cy="46" r="5" fill="#FFE08A" />
+      <path d="M56 46 Q62 38 68 46" fill="#FFF3C4" />
+    </>
+  ),
+  footprints: () => (
+    <>
+      <ellipse cx="28" cy="26" rx="7" ry="11" fill="#8C867E" transform="rotate(-12 28 26)" />
+      <ellipse cx="26" cy="16" rx="5" ry="3" fill="#8C867E" />
+      <ellipse cx="50" cy="46" rx="7" ry="11" fill="#A8A29A" transform="rotate(-12 50 46)" />
+      <ellipse cx="48" cy="36" rx="5" ry="3" fill="#A8A29A" />
+      <ellipse cx="30" cy="64" rx="7" ry="11" fill="#C4BEB4" transform="rotate(-12 30 64)" />
+    </>
+  ),
+  seed: () => (
+    <>
+      <ellipse cx="40" cy="48" rx="12" ry="16" fill="#B07C42" />
+      <path d="M40 34 Q40 22 32 16" stroke="#4E8B4A" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M32 16 Q24 18 26 26 Q34 26 32 16Z" fill="#5FA455" />
+      <path d="M36 44 Q40 50 44 44" stroke="#8a5a2b" strokeWidth="2" fill="none" />
+    </>
+  ),
+  'tree-of-life': () => (
+    <>
+      <rect x="36" y="44" width="8" height="22" rx="2" fill={brown} />
+      <path d="M40 52 L28 62 M40 48 L54 60" stroke={brown} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="40" cy="30" r="18" fill="#4E8B4A" />
+      <circle cx="26" cy="36" r="9" fill="#5FA455" />
+      <circle cx="54" cy="36" r="9" fill="#5FA455" />
+      <circle cx="40" cy="30" r="6" fill={gold} />
+    </>
+  ),
 };

@@ -7,8 +7,9 @@ import { ProgressBar } from '../../components/ui/ProgressBar';
 import { ChoiceCard } from '../../components/ui/ChoiceCard';
 import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { Scene } from '../../components/illustrations/Scene';
-import { getStory } from '../../content/stories';
+import { getStory, pagesForAge } from '../../content/stories';
 import { useProgressStore } from '../../store/progressStore';
+import { useSettingsStore } from '../../store/settingsStore';
 import { useSpeech } from '../../hooks/useSpeech';
 
 export function ChapterReader() {
@@ -17,6 +18,7 @@ export function ChapterReader() {
   const completeChapter = useProgressStore((s) => s.completeChapter);
   const recordChoice = useProgressStore((s) => s.recordChoice);
   const { speak, stop, speaking } = useSpeech();
+  const ageBand = useSettingsStore((s) => s.ageBand);
 
   const story = storyId ? getStory(storyId) : undefined;
   const chapterIndex = Number(chapterIndexParam ?? 0);
@@ -26,8 +28,11 @@ export function ChapterReader() {
   const [choiceIndex, setChoiceIndex] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
 
-  const totalSteps = useMemo(() => (chapter ? chapter.pages.length + (chapter.choice ? 1 : 0) : 1), [chapter]);
-  const atChoiceStep = chapter ? pageIndex === chapter.pages.length : false;
+  /** A narração muda conforme a faixa etária definida na Área dos Pais. */
+  const pages = useMemo(() => (chapter ? pagesForAge(chapter, ageBand) : []), [chapter, ageBand]);
+
+  const totalSteps = useMemo(() => pages.length + (chapter?.choice ? 1 : 0), [pages, chapter]);
+  const atChoiceStep = chapter ? pageIndex === pages.length : false;
 
   if (!story || !chapter) return <Navigate to="/app/historias" replace />;
 
@@ -67,7 +72,7 @@ export function ChapterReader() {
             <motion.div key={`page-${pageIndex}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col gap-4">
               <Scene scene={chapter.scene} height={220} />
               <h2 className="font-display text-center text-lg font-bold text-navy">{chapter.title}</h2>
-              <p className="text-center text-lg leading-relaxed text-navy-deep">{chapter.pages[pageIndex]}</p>
+              <p className="text-center text-lg leading-relaxed text-navy-deep">{pages[pageIndex]}</p>
             </motion.div>
           ) : (
             <motion.div key="choice" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col gap-4">
@@ -102,7 +107,7 @@ export function ChapterReader() {
       <div className="mt-4 flex items-center gap-3 border-t border-navy/10 px-4 pt-4">
         {!atChoiceStep && (
           <button
-            onClick={() => (speaking ? stop() : speak(chapter.pages[pageIndex]))}
+            onClick={() => (speaking ? stop() : speak(pages[pageIndex]))}
             className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-orange text-white shadow-[0_6px_0_0_var(--color-orange-dark)]"
             aria-label="Narrar"
           >

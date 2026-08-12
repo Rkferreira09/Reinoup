@@ -4,7 +4,10 @@ import { versesByCategory } from '../content/verses';
 import { MISSIONS } from '../content/missions';
 import type { ProgressState } from './progress-types';
 
-const COURAGE_LIKE_THEMES = ['coragem', 'fidelidade'];
+import type { Valor } from '../content/valores';
+
+/** A missão "Semana da Coragem" conta histórias de coragem e das que exigem confiar. */
+const VALORES_DE_CORAGEM: Valor[] = ['coragem', 'confianca'];
 
 /** Derived (computed, not stored) progress for trilha/temática/coleção missions. */
 export function getDerivedMissionProgress(missionId: string, state: ProgressState): number {
@@ -12,7 +15,7 @@ export function getDerivedMissionProgress(missionId: string, state: ProgressStat
     case 'trilha-discipulos':
       return state.disciplesLearned.length;
     case 'tematica-coragem':
-      return STORIES.filter((s) => COURAGE_LIKE_THEMES.includes(s.theme) && state.stories[s.id]?.completed).length;
+      return STORIES.filter((s) => VALORES_DE_CORAGEM.includes(s.valor) && state.stories[s.id]?.completed).length;
     case 'colecao-amor': {
       const amorIds = new Set(versesByCategory('amor').map((v) => v.id));
       return state.versesCollected.filter((id) => amorIds.has(id)).length;

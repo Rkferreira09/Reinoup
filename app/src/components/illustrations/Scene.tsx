@@ -14,6 +14,7 @@ const GROUND_COLORS: Record<SceneConfig['ground'], string> = {
   agua: '#5FA3D9',
   pedra: '#9AA0A6',
   palacio: '#D9C48C',
+  jardim: '#7FBF6A',
 };
 
 const SKY_MOTIFS = new Set<Motif>(['rainbow', 'dove', 'star', 'angel', 'fire-column', 'rain']);

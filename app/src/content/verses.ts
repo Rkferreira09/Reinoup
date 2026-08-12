@@ -148,7 +148,7 @@ export const VERSES: Verse[] = [
   {
     id: 'v-fe-1',
     reference: 'Hebreus 11:1',
-    category: 'fe',
+    category: 'confianca',
     text: {
       '5-7': 'Ter fé é confiar em Deus mesmo sem ver.',
       '8-10': 'A fé é a certeza daquilo que esperamos e a prova das coisas que não vemos.',
@@ -157,7 +157,7 @@ export const VERSES: Verse[] = [
   {
     id: 'v-fe-2',
     reference: 'Provérbios 3:5',
-    category: 'fe',
+    category: 'confianca',
     text: {
       '5-7': 'Confie em Deus de todo o coração.',
       '8-10': 'Confie no Senhor de todo o coração e não se apoie no seu próprio entendimento.',
@@ -166,7 +166,7 @@ export const VERSES: Verse[] = [
   {
     id: 'v-fe-3',
     reference: 'Mateus 17:20',
-    category: 'fe',
+    category: 'confianca',
     text: {
       '5-7': 'Com uma fezinha pequena como uma sementinha, tudo é possível.',
       '8-10': 'Se tiverem fé do tamanho de um grão de mostarda, vocês poderão dizer a este monte: vá daqui para lá, e ele irá.',
@@ -175,7 +175,7 @@ export const VERSES: Verse[] = [
   {
     id: 'v-fe-4',
     reference: 'Salmos 46:1',
-    category: 'fe',
+    category: 'confianca',
     text: {
       '5-7': 'Deus é o nosso refúgio e a nossa força.',
       '8-10': 'Deus é o nosso refúgio e a nossa fortaleza, socorro bem presente na angústia.',
@@ -184,7 +184,7 @@ export const VERSES: Verse[] = [
   {
     id: 'v-fe-5',
     reference: 'Romanos 8:28',
-    category: 'fe',
+    category: 'confianca',
     text: {
       '5-7': 'Deus faz tudo ajudar para o bem de quem o ama.',
       '8-10': 'Sabemos que Deus age em todas as coisas para o bem daqueles que o amam.',
@@ -284,6 +284,17 @@ export const VERSES: Verse[] = [
     text: {
       '5-7': 'Seja paciente e perdoe, assim como Jesus perdoa você.',
       '8-10': 'Suportem-se uns aos outros e perdoem as queixas que tiverem uns contra os outros, como o Senhor os perdoou.',
+    },
+  },
+
+  // ---- versículos das histórias (um por aula da temporada) ----
+  {
+    id: 'v-gn-01',
+    reference: 'Gênesis 1:1',
+    category: 'identidade',
+    text: {
+      '5-7': 'No começo, Deus criou o céu e a terra.',
+      '8-10': 'No princípio, Deus criou os céus e a terra.',
     },
   },
 ];

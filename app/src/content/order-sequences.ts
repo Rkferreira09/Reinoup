@@ -70,6 +70,30 @@ export const ORDER_SEQUENCES: OrderSequence[] = [
       'Dia 6: Deus cria os animais e os seres humanos',
     ],
   },
+  {
+    id: 'seq-jonas',
+    title: 'A história de Jonas',
+    requiresStoryId: 'jonas-grande-peixe',
+    steps: [
+      'Deus manda Jonas ir até Nínive',
+      'Jonas foge de navio para o outro lado',
+      'A tempestade chega e Jonas é jogado ao mar',
+      'Um grande peixe engole Jonas por três dias',
+      'Jonas obedece, vai a Nínive e a cidade se arrepende',
+    ],
+  },
+  {
+    id: 'seq-daniel',
+    title: 'A história de Daniel',
+    requiresStoryId: 'daniel-cova-dos-leoes',
+    steps: [
+      'Daniel serve o rei com fidelidade e ora todo dia',
+      'Os outros líderes ficam com inveja dele',
+      'Eles criam uma lei que proíbe orar',
+      'Daniel continua orando e é jogado na cova',
+      'Deus fecha a boca dos leões e Daniel sai ileso',
+    ],
+  },
 ];
 
 export function getOrderSequence(id: string): OrderSequence | undefined {

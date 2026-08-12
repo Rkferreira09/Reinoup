@@ -8,7 +8,7 @@ import { Scene } from '../../components/illustrations/Scene';
 import { useAuthStore } from '../../store/authStore';
 import { useProgressStore } from '../../store/progressStore';
 import { useSettingsStore } from '../../store/settingsStore';
-import { STORIES } from '../../content/stories';
+import { proximaHistoria } from '../../content/stories';
 import { getVerseOfDay } from '../../content/verses';
 import { getLevelProgress, levelTitle } from '../../content/levels';
 
@@ -23,7 +23,7 @@ export function Home() {
   const level = getLevelProgress(xp);
   const verse = getVerseOfDay();
 
-  const currentStory = STORIES.find((s) => !stories[s.id]?.completed) ?? STORIES[STORIES.length - 1];
+  const currentStory = proximaHistoria(new Set(Object.keys(stories).filter((id) => stories[id]?.completed)));
   const currentStoryProgress = stories[currentStory.id];
   const chaptersDone = currentStoryProgress?.chaptersCompleted ?? 0;
   const storyPct = chaptersDone / currentStory.chapters.length;

@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "check:conteudo": "bun scripts/check-content.ts",
+    "check": "bun run lint && bun run check:conteudo && bun run build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,5 +32,6 @@
     "typescript": "~6.0.2",
     "vite": "^8.2.0",
     "vite-plugin-pwa": "^1.3.0"
-  }
+  },
+  "packageManager": "bun@1.3.14"
 }
