@@ -1,10 +1,6 @@
 ﻿import sharp from "sharp";
-const base = "C:/Users/user/Desktop/APP-RAMON/02. Reino UP/01. Identidade Visual/";
-for (const n of ["logo.png", "Mascote-Transparente.png"]) {
-  const img = sharp(base + n);
-  const { width, height } = await img.metadata();
-  const buf = await img.raw().toBuffer();
-  const px = (x, y) => { const i = (y * width + x) * 3; return [buf[i], buf[i + 1], buf[i + 2]]; };
-  const cantos = [px(0,0), px(width-1,0), px(0,height-1), px(width-1,height-1), px(Math.floor(width/2),0)];
-  console.log(`${n} (${width}x${height}) cantos: ${cantos.map(c=>c.join(",")).join(" | ")}`);
-}
+const f = "C:/Users/user/Desktop/APP-RAMON/02. Reino UP/01. Identidade Visual/logo.png";
+const m = await sharp(f).metadata();
+const s = await sharp(f).stats();
+const a = s.channels.length === 4 ? s.channels[3] : null;
+console.log(`logo.png | ${m.width}x${m.height} | canais:${m.channels} | alpha:${m.hasAlpha} | alphaMin:${a ? a.min : "-"} | transparente de verdade: ${a && a.min < 250}`);
