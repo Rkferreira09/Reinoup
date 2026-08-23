@@ -6,6 +6,7 @@ import { useAuthStore } from '../../store/authStore';
 import { useProgressStore } from '../../store/progressStore';
 import { getLevelProgress } from '../../content/levels';
 import { ConquistasVitrine } from '../../components/ui/ConquistasVitrine';
+import { BrandIcon, type BrandIconName } from '../../components/illustrations/BrandIcon';
 import { getAvatarItem } from '../../content/avatar-items';
 import { STORIES } from '../../content/stories';
 
@@ -61,24 +62,26 @@ export function Profile() {
       <ConquistasVitrine badgesUnlocked={badgesUnlocked} />
 
       <div className="flex flex-col gap-3">
-        <Link to="/app/ranking" className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-[var(--shadow-card)]">
-          <span className="font-display font-bold text-navy">🏆 Ranking de amigos</span>
-          <span className="text-navy/40">›</span>
-        </Link>
-        <Link to="/app/album-adesivos" className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-[var(--shadow-card)]">
-          <span className="font-display font-bold text-navy">🖼️ Álbum de adesivos</span>
-          <span className="text-navy/40">›</span>
-        </Link>
-        <Link to="/app/planos" className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-[var(--shadow-card)]">
-          <span className="font-display font-bold text-navy">👑 Planos</span>
-          <span className="text-navy/40">›</span>
-        </Link>
-        <Link to="/pais/pin" className="flex items-center justify-between rounded-2xl bg-navy p-4 text-white shadow-[var(--shadow-card)]">
-          <span className="font-display font-bold">🔒 Área dos Pais</span>
-          <span className="text-white/50">›</span>
-        </Link>
+        <LinhaDoPerfil to="/app/ranking" icone="ranking" titulo="Ranking de amigos" />
+        <LinhaDoPerfil to="/app/album-adesivos" icone="recompensas" titulo="Álbum de adesivos" />
+        <LinhaDoPerfil to="/app/planos" icone="desafios" titulo="Planos" />
+        <LinhaDoPerfil to="/pais/pin" icone="protecao" titulo="Área dos Pais" destaque />
       </div>
     </div>
   );
 }
 
+function LinhaDoPerfil({ to, icone, titulo, destaque }: { to: string; icone: BrandIconName; titulo: string; destaque?: boolean }) {
+  return (
+    <Link
+      to={to}
+      className={`flex items-center gap-3 rounded-2xl p-4 shadow-[var(--shadow-card)] ${
+        destaque ? 'bg-navy text-white' : 'bg-white'
+      }`}
+    >
+      <BrandIcon name={icone} size={26} />
+      <span className={`font-display flex-1 font-bold ${destaque ? '' : 'text-navy'}`}>{titulo}</span>
+      <span className={destaque ? 'text-white/50' : 'text-navy/40'}>›</span>
+    </Link>
+  );
+}
