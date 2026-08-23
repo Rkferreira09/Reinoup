@@ -1,15 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
-import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
 import { ProgressBar } from '../../components/ui/ProgressBar';
+import { BrandIcon, type BrandIconName } from '../../components/illustrations/BrandIcon';
 import { useProgressStore } from '../../store/progressStore';
 import { SHIELD_COST_COINS } from '../../lib/economy';
 
-const TASK_ICONS: Record<string, string> = {
-  'ouvir-historia': '📖',
-  'acertar-quiz': '❤️',
-  'decorar-versiculo': '📜',
+/**
+ * Desafios diários — construída a partir da tela 10 do mockup.
+ *
+ * Referência: cada tarefa numa linha alta, com disco colorido à esquerda
+ * (verde e com ✓ quando feita, laranja em andamento, cinza intocada) e selo
+ * de concluída à direita. Embaixo, ofensiva e escudo lado a lado, e o botão
+ * laranja do baú fechando a tela.
+ */
+const TASK_ICONS: Record<string, BrandIconName> = {
+  'ouvir-historia': 'licoes',
+  'acertar-quiz': 'amor',
+  'decorar-versiculo': 'fe',
 };
 
 export function DailyChallenges() {
@@ -21,60 +28,100 @@ export function DailyChallenges() {
   const buyShield = useProgressStore((s) => s.buyShield);
 
   const allDone = dailyChallenge.tasks.every((t) => t.done);
+  const feitas = dailyChallenge.tasks.filter((t) => t.done).length;
 
   return (
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Desafios diários" backTo="/app" />
+
       <div className="flex flex-col gap-4 px-4">
-        <p className="text-center text-navy/70">Complete os desafios e ganhe moedas e XP!</p>
+        <p className="text-center text-base font-semibold leading-snug text-navy/70">
+          Complete os desafios e ganhe moedas e XP!
+        </p>
 
-        {dailyChallenge.tasks.map((task) => (
-          <Card key={task.id} className="flex items-center gap-3">
-            <div
-              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-lg ${
-                task.done ? 'bg-green-light' : 'bg-cream-dark'
-              }`}
-            >
-              {task.done ? '✓' : TASK_ICONS[task.id]}
-            </div>
-            <div className="flex-1">
-              <p className="font-display font-bold text-navy">{task.label}</p>
-              <div className="mt-1 flex items-center gap-2">
-                <ProgressBar value={task.progress / task.target} height={8} color={task.done ? 'var(--color-green)' : 'var(--color-orange)'} />
-                <span className="shrink-0 text-xs font-bold text-navy/50">
-                  {task.progress}/{task.target}
-                </span>
+        <div className="flex flex-col gap-3">
+          {dailyChallenge.tasks.map((task) => {
+            const comecou = task.progress > 0;
+            const disco = task.done ? 'bg-green' : comecou ? 'bg-orange' : 'bg-gray';
+
+            return (
+              <div
+                key={task.id}
+                className={`flex items-center gap-4 rounded-[24px] p-4 shadow-[var(--shadow-card)] ${
+                  task.done ? 'bg-green-light/60' : 'bg-white'
+                }`}
+              >
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${disco}`}>
+                  <BrandIcon name={TASK_ICONS[task.id] ?? 'progresso'} size={26} className="brightness-0 invert" />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="font-display text-base font-bold leading-tight text-navy">{task.label}</p>
+                  {!task.done && (
+                    <div className="mt-2 flex items-center gap-2">
+                      <ProgressBar
+                        value={task.target ? task.progress / task.target : 0}
+                        height={10}
+                        color="var(--color-orange)"
+                      />
+                      <span className="shrink-0 text-xs font-bold tabular-nums text-navy/50">
+                        {task.progress}/{task.target}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {task.done && (
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green text-lg font-bold text-white">
+                    ✓
+                  </span>
+                )}
               </div>
-            </div>
-          </Card>
-        ))}
+            );
+          })}
+        </div>
 
-        <Card>
-          <div className="flex items-center justify-around text-center">
-            <div>
-              <p className="font-display text-xs font-bold uppercase text-navy/50">Sua ofensiva</p>
-              <p className="mt-1 text-xl font-extrabold text-orange-dark">🔥 {streakDays} dias</p>
+        {/* ---- ofensiva e escudo ---- */}
+        <div className="rounded-[24px] bg-white p-5 shadow-[var(--shadow-card)]">
+          <div className="grid grid-cols-2 divide-x divide-navy/10 text-center">
+            <div className="px-2">
+              <p className="font-display text-sm font-bold text-navy/60">Sua ofensiva</p>
+              <p className="font-display mt-2 text-2xl font-extrabold text-navy">
+                <span className="mr-1 text-2xl">🔥</span>
+                {streakDays} {streakDays === 1 ? 'dia' : 'dias'}
+              </p>
             </div>
-            <div className="h-10 w-px bg-navy/10" />
-            <div>
-              <p className="font-display text-xs font-bold uppercase text-navy/50">Escudo</p>
-              <p className="mt-1 text-xl font-extrabold text-navy">🛡️ {shieldsAvailable} disponível</p>
+            <div className="px-2">
+              <p className="font-display text-sm font-bold text-navy/60">Escudo</p>
+              <p className="font-display mt-2 flex items-center justify-center gap-1.5 text-2xl font-extrabold text-navy">
+                <BrandIcon name="protecao" size={26} />
+                {shieldsAvailable}
+              </p>
             </div>
           </div>
+
           {shieldsAvailable < 2 && (
             <button
               disabled={coins < SHIELD_COST_COINS}
               onClick={buyShield}
-              className="mt-3 w-full rounded-xl bg-navy/5 py-2 text-sm font-bold text-navy disabled:opacity-40"
+              className="mt-4 w-full rounded-pill border-2 border-navy/10 py-2.5 text-sm font-bold text-navy disabled:opacity-40"
             >
               Comprar escudo extra ({SHIELD_COST_COINS} moedas)
             </button>
           )}
-        </Card>
+        </div>
 
-        <Button full size="lg" disabled={!allDone || dailyChallenge.chestOpened} onClick={() => navigate('/app/bau')}>
-          {dailyChallenge.chestOpened ? 'Baú de hoje já aberto' : allDone ? 'Ver baú' : 'Complete os desafios para abrir o baú'}
-        </Button>
+        <p className="text-center text-xs font-semibold text-navy/45">
+          {feitas} de {dailyChallenge.tasks.length} concluídos hoje
+        </p>
+
+        <button
+          disabled={!allDone || dailyChallenge.chestOpened}
+          onClick={() => navigate('/app/bau')}
+          className="w-full rounded-pill bg-orange py-4 font-display text-lg font-bold text-white shadow-[0_6px_0_0_var(--color-orange-dark)] active:translate-y-[4px] active:shadow-[0_2px_0_0_var(--color-orange-dark)] disabled:bg-gray disabled:shadow-[0_6px_0_0_var(--color-gray-dark)] disabled:opacity-70"
+        >
+          {dailyChallenge.chestOpened ? 'Baú de hoje já aberto' : allDone ? 'Ver baú' : 'Complete para abrir o baú'}
+        </button>
       </div>
     </div>
   );
