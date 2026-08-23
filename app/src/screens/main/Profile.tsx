@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Card } from '../../components/ui/Card';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Mascot } from '../../components/mascot/Mascot';
 import { useAuthStore } from '../../store/authStore';
 import { useProgressStore } from '../../store/progressStore';
 import { getLevelProgress } from '../../content/levels';
-import { BADGES } from '../../content/badges';
+import { ConquistasVitrine } from '../../components/ui/ConquistasVitrine';
 import { getAvatarItem } from '../../content/avatar-items';
 import { STORIES } from '../../content/stories';
 
@@ -58,34 +58,7 @@ export function Profile() {
         </div>
       </Card>
 
-      <div>
-        <h2 className="font-display mb-2 text-lg font-bold text-navy">Conquistas</h2>
-        <div className="grid grid-cols-4 gap-3">
-          {BADGES.map((b) => {
-            const unlocked = badgesUnlocked.includes(b.id);
-            if (b.category === 'secreta' && !unlocked) {
-              return (
-                <div key={b.id} className="flex flex-col items-center gap-1">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-navy/5 text-xl opacity-40">❓</div>
-                  <p className="text-center text-[10px] font-bold text-navy/40">Secreta</p>
-                </div>
-              );
-            }
-            return (
-              <div key={b.id} className="flex flex-col items-center gap-1">
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl ${
-                    unlocked ? 'bg-gradient-to-br from-gold-light to-gold' : 'bg-navy/5 grayscale opacity-40'
-                  }`}
-                >
-                  {b.icon}
-                </div>
-                <p className="text-center text-[10px] font-bold leading-tight text-navy/70">{b.name}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <ConquistasVitrine badgesUnlocked={badgesUnlocked} />
 
       <div className="flex flex-col gap-3">
         <Link to="/app/ranking" className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-[var(--shadow-card)]">
@@ -108,3 +81,4 @@ export function Profile() {
     </div>
   );
 }
+

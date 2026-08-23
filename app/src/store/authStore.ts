@@ -79,7 +79,10 @@ export const useAuthStore = create<AuthState>()(
 
       verifyParentPin: (pin) => {
         const state = get();
-        if (!state.parentPinHash) return pin === '0000';
+        // Sem PIN criado não existe atalho: o fluxo obriga a criar um antes de
+        // entrar. Um padrão adivinhável ("0000") deixava a Área dos Pais aberta
+        // para qualquer criança que testasse quatro zeros.
+        if (!state.parentPinHash) return false;
         return state.parentPinHash === simpleHash(pin);
       },
 
