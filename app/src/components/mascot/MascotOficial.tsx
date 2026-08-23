@@ -1,35 +1,47 @@
 import { useState } from 'react';
 import { Mascot, type MascotPose } from './Mascot';
 
+/**
+ * Arte oficial da marca — o cordeirinho 3D de boné esportivo e o logo.
+ *
+ * Gerados por `bun scripts/build-brand-assets.mjs` a partir dos originais em
+ * `02. Reino UP/01. Identidade Visual/`. WebP é o formato servido; se o
+ * navegador não aceitar, o `<picture>` cai no PNG. Se o arquivo não existir,
+ * o componente cai no vetor antigo — assim a tela nunca quebra.
+ */
+
+type Recorte = 'inteiro' | 'busto';
+
 interface MascotOficialProps {
   size?: number;
-  /** Pose do fallback vetorial, usada só enquanto o PNG não existir. */
+  /** Pose do fallback vetorial, usada só se a arte não carregar. */
   pose?: MascotPose;
+  /** 'busto' corta na altura do peito — melhor em tamanho pequeno, como nos balões. */
+  recorte?: Recorte;
   className?: string;
 }
 
-/**
- * O cordeirinho oficial — render 3D de boné esportivo, versão confirmada do
- * brandbook (a de capuz das 21 telas de mockup foi aposentada).
- *
- * Enquanto `public/brand/mascote.png` não existir, cai no `Mascot` vetorial.
- * Assim a tela nunca quebra e a troca acontece só soltando o arquivo na pasta.
- */
-export function MascotOficial({ size = 120, pose = 'feliz', className = '' }: MascotOficialProps) {
-  const [semImagem, setSemImagem] = useState(false);
+export function MascotOficial({ size = 120, pose = 'feliz', recorte, className = '' }: MascotOficialProps) {
+  const [falhou, setFalhou] = useState(false);
 
-  if (semImagem) return <Mascot pose={pose} size={size} className={className} />;
+  // Abaixo de ~96px o corpo inteiro vira um borrão: usa o busto por padrão.
+  const usarBusto = recorte ? recorte === 'busto' : size < 96;
+  const nome = usarBusto ? 'mascote-busto' : 'mascote';
+  const base = import.meta.env.BASE_URL;
+
+  if (falhou) return <Mascot pose={pose} size={size} className={className} />;
 
   return (
-    <img
-      src={`${import.meta.env.BASE_URL}brand/mascote.png`}
-      alt="Cordeirinho do ReinoUp"
-      width={size}
-      height={size}
-      onError={() => setSemImagem(true)}
-      className={`object-contain ${className}`}
-      style={{ width: size, height: 'auto' }}
-    />
+    <picture>
+      <source srcSet={`${base}brand/${nome}.webp`} type="image/webp" />
+      <img
+        src={`${base}brand/${nome}.png`}
+        alt="Cordeirinho do ReinoUp"
+        onError={() => setFalhou(true)}
+        className={`object-contain ${className}`}
+        style={{ width: size, height: 'auto' }}
+      />
+    </picture>
   );
 }
 
@@ -38,14 +50,11 @@ interface LogoOficialProps {
   className?: string;
 }
 
-/**
- * Logo do ReinoUp — Bíblia aberta com cruz dourada e o wordmark.
- * Sem o PNG, mostra o wordmark em Baloo 2, que já é a fonte da marca.
- */
 export function LogoOficial({ height = 48, className = '' }: LogoOficialProps) {
-  const [semImagem, setSemImagem] = useState(false);
+  const [falhou, setFalhou] = useState(false);
+  const base = import.meta.env.BASE_URL;
 
-  if (semImagem) {
+  if (falhou) {
     return (
       <span className={`font-display font-extrabold ${className}`} style={{ fontSize: height * 0.8 }}>
         ReinoUp
@@ -54,12 +63,15 @@ export function LogoOficial({ height = 48, className = '' }: LogoOficialProps) {
   }
 
   return (
-    <img
-      src={`${import.meta.env.BASE_URL}brand/logo.png`}
-      alt="ReinoUp"
-      onError={() => setSemImagem(true)}
-      className={`object-contain ${className}`}
-      style={{ height, width: 'auto' }}
-    />
+    <picture>
+      <source srcSet={`${base}brand/logo.webp`} type="image/webp" />
+      <img
+        src={`${base}brand/logo.png`}
+        alt="ReinoUp"
+        onError={() => setFalhou(true)}
+        className={`object-contain ${className}`}
+        style={{ height, width: 'auto' }}
+      />
+    </picture>
   );
 }

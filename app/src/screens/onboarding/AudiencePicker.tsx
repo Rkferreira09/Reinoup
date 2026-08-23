@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+﻿import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TopBar } from '../../components/ui/TopBar';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
 
 export function AudiencePicker() {
@@ -24,7 +24,7 @@ export function AudiencePicker() {
           onClick={() => choose('crianca')}
           className="mb-5 flex items-center gap-4 rounded-[var(--radius-card)] bg-blue-sky/25 p-5 text-left"
         >
-          <Mascot pose="feliz" size={80} animated={false} />
+          <MascotOficial size={80} recorte="busto" />
           <div>
             <p className="font-display text-xl font-bold text-navy">Sou criança</p>
             <p className="text-sm text-navy/70">Quero aprender e me divertir!</p>
@@ -46,3 +46,4 @@ export function AudiencePicker() {
     </div>
   );
 }
+
