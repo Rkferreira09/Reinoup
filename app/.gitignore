@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Segredos locais das Cloudflare Pages Functions (Stripe etc.) — nunca commitar
+.dev.vars
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
@@ -9,20 +9,54 @@ import { useSettingsStore } from '../../store/settingsStore';
 
 export function Plans() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentPlan = useSettingsStore((s) => s.plan);
   const subscribe = useSettingsStore((s) => s.subscribe);
   const [cycle, setCycle] = useState<'mensal' | 'anual'>('mensal');
   const [selected, setSelected] = useState<typeof PLANS[number]['id']>('completo');
   const [confirmed, setConfirmed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Volta do Stripe Checkout: ?status=success confirma a assinatura de verdade;
+  // ?status=cancelled só limpa a URL (o usuário desistiu no meio do pagamento).
+  useEffect(() => {
+    const status = searchParams.get('status');
+    if (status === 'success') {
+      const plan = searchParams.get('plan') as typeof PLANS[number]['id'] | null;
+      const cycleParam = searchParams.get('cycle') as 'mensal' | 'anual' | null;
+      if (plan) {
+        subscribe(plan, cycleParam ?? 'mensal');
+        setSelected(plan);
+        setConfirmed(true);
+      }
+    }
+    if (status) setSearchParams({}, { replace: true });
+  }, [searchParams, setSearchParams, subscribe]);
 
   function priceFor(monthly: number) {
     const value = cycle === 'anual' ? monthly * (1 - ANNUAL_DISCOUNT) : monthly;
     return value.toFixed(2).replace('.', ',');
   }
 
-  function handleSubscribe() {
-    subscribe(selected, cycle);
-    setConfirmed(true);
+  async function handleSubscribe() {
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId: selected, cycle }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? 'Não foi possível iniciar o pagamento.');
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Não foi possível iniciar o pagamento. Tente novamente.');
+      setLoading(false);
+    }
   }
 
   return (
@@ -75,11 +109,12 @@ export function Plans() {
           ))}
         </div>
 
-        <Button full size="lg" className="mt-6" onClick={handleSubscribe}>
-          Assinar agora
+        <Button full size="lg" className="mt-6" onClick={handleSubscribe} disabled={loading}>
+          {loading ? 'Abrindo pagamento...' : 'Assinar agora'}
         </Button>
+        {error && <p className="mt-3 text-center text-sm font-semibold text-red-soft">{error}</p>}
         <p className="mt-3 text-center text-xs text-navy/40">
-          Demonstração: nenhuma cobrança real é feita neste protótipo.
+          Pagamento seguro via Stripe. Cartão e Pix aceitos.
         </p>
       </div>
 

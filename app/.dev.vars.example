@@ -1,0 +1,14 @@
+# Copie para .dev.vars ao testar as Pages Functions localmente com
+# `bunx wrangler pages dev` (não é o `bun run dev` normal — esse é só o
+# Vite, que não roda /api/*). Em produção, configure as MESMAS chaves em:
+# Cloudflare Pages → seu projeto → Settings → Environment variables.
+#
+# Nunca commite .dev.vars nem cole a chave secreta em código.
+
+# Chave secreta do Stripe (Dashboard → Developers → API keys).
+# Use sk_test_... para testar antes de ir ao ar com sk_live_...
+STRIPE_SECRET_KEY=
+
+# "Signing secret" mostrado ao criar o webhook em
+# Dashboard → Developers → Webhooks → seu endpoint.
+STRIPE_WEBHOOK_SECRET=
