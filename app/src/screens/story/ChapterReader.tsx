@@ -70,7 +70,7 @@ export function ChapterReader() {
         <AnimatePresence mode="wait">
           {!atChoiceStep ? (
             <motion.div key={`page-${pageIndex}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col gap-4">
-              <Scene scene={chapter.scene} height={220} />
+              <Scene scene={chapter.scene} artId={chapter.id} showGuide height={220} />
               <h2 className="font-display text-center text-lg font-bold text-navy">{chapter.title}</h2>
               <p className="text-center text-lg leading-relaxed text-navy-deep">{pages[pageIndex]}</p>
             </motion.div>

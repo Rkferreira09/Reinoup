@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mascot, type MascotPose } from './Mascot';
+import { ImageAsset } from '../illustrations/ImageAsset';
 
 /**
  * Arte oficial da marca — o cordeirinho 3D de boné esportivo e o logo.
@@ -26,22 +27,17 @@ export function MascotOficial({ size = 120, pose = 'feliz', recorte, className =
 
   // Abaixo de ~96px o corpo inteiro vira um borrão: usa o busto por padrão.
   const usarBusto = recorte ? recorte === 'busto' : size < 96;
-  const nome = usarBusto ? 'mascote-busto' : 'mascote';
-  const base = import.meta.env.BASE_URL;
 
   if (falhou) return <Mascot pose={pose} size={size} className={className} />;
 
   return (
-    <picture>
-      <source srcSet={`${base}brand/${nome}.webp`} type="image/webp" />
-      <img
-        src={`${base}brand/${nome}.png`}
-        alt="Cordeirinho do ReinoUp"
-        onError={() => setFalhou(true)}
-        className={`object-contain ${className}`}
-        style={{ width: size, height: 'auto' }}
-      />
-    </picture>
+    <ImageAsset
+      asset={usarBusto ? 'mascotBust' : 'mascot'}
+      onError={() => setFalhou(true)}
+      className={`object-contain ${className}`}
+      style={{ width: size, height: 'auto' }}
+      loading="eager"
+    />
   );
 }
 
@@ -52,7 +48,6 @@ interface LogoOficialProps {
 
 export function LogoOficial({ height = 48, className = '' }: LogoOficialProps) {
   const [falhou, setFalhou] = useState(false);
-  const base = import.meta.env.BASE_URL;
 
   if (falhou) {
     return (
@@ -63,15 +58,12 @@ export function LogoOficial({ height = 48, className = '' }: LogoOficialProps) {
   }
 
   return (
-    <picture>
-      <source srcSet={`${base}brand/logo.webp`} type="image/webp" />
-      <img
-        src={`${base}brand/logo.png`}
-        alt="ReinoUp"
-        onError={() => setFalhou(true)}
-        className={`object-contain ${className}`}
-        style={{ height, width: 'auto' }}
-      />
-    </picture>
+    <ImageAsset
+      asset="logo"
+      onError={() => setFalhou(true)}
+      className={`object-contain ${className}`}
+      style={{ height, width: 'auto' }}
+      loading="eager"
+    />
   );
 }

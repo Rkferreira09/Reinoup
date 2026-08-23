@@ -53,7 +53,7 @@ export function StoriesList() {
                       const card = (
                         <Card padded={false} className="overflow-hidden">
                           <div className="relative">
-                            <Scene scene={story.cover} height={150} className="rounded-none" />
+                            <Scene scene={story.cover} artId={story.id} height={150} className="rounded-none" />
 
                             {season.sequencial && (
                               <span className="font-display absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-base font-extrabold text-navy shadow-[var(--shadow-card)]">

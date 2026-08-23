@@ -9,6 +9,7 @@
     "build:fast": "tsc -b && vite build",
     "lint": "oxlint",
     "check:conteudo": "bun scripts/check-content.ts",
+    "assets:stories": "bun scripts/build-story-assets.mjs",
     "check": "bun run lint && bun run check:conteudo && bun run build:fast",
     "preview": "vite preview"
   },

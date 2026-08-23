@@ -1,5 +1,6 @@
 import { TopBar } from '../../components/ui/TopBar';
 import { Card } from '../../components/ui/Card';
+import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { useProgressStore } from '../../store/progressStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { VERSES } from '../../content/verses';
@@ -26,7 +27,9 @@ export function VerseShelf() {
           {collected.length} de {VERSES.length} versículos decorados
         </p>
         {collected.length === 0 ? (
-          <Card className="text-center text-navy/60">Você ainda não decorou nenhum versículo. Comece pelo Versículo do Dia!</Card>
+          <SpeechBubble pose="pensando" tone="info">
+            Você ainda não decorou nenhum versículo. Comece pelo Versículo do Dia!
+          </SpeechBubble>
         ) : (
           <div className="flex flex-col gap-3">
             {collected.map((v) => (

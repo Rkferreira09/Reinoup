@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CoinBadge } from '../../components/ui/CoinBadge';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { Scene } from '../../components/illustrations/Scene';
 import { BrandIcon } from '../../components/illustrations/BrandIcon';
 import { useAuthStore } from '../../store/authStore';
@@ -74,6 +75,17 @@ export function Home() {
         </div>
       </header>
 
+      {/* ---- boas-vindas ilustrada ---- */}
+      <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-white to-cream-dark px-4 pb-3 pt-2 shadow-[var(--shadow-soft)]">
+        <div className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full bg-yellow/25" />
+        <div className="relative flex items-end gap-2">
+          <MascotOficial pose="acenando" size={112} className="shrink-0" />
+          <div className="mb-5 rounded-3xl rounded-bl-md bg-white px-4 py-3 text-sm font-extrabold leading-snug text-navy-deep shadow-[var(--shadow-card)]">
+            Vamos aprender a Palavra de Deus hoje!
+          </div>
+        </div>
+      </section>
+
       {/* ---- versículo do dia ---- */}
       {contentToggles.versiculoDoDia && (
         <section className="relative overflow-hidden rounded-[28px] bg-white p-6 shadow-[var(--shadow-soft)]">
@@ -112,7 +124,7 @@ export function Home() {
               progresso={storyPct}
               indicador={`${Math.round(storyPct * 100)}%`}
               corDaBarra="var(--color-green)"
-              miniatura={<Scene scene={currentStory.cover} height={72} width={72} className="rounded-2xl" />}
+              miniatura={<Scene scene={currentStory.cover} artId={currentStory.id} height={72} width={72} className="rounded-2xl" />}
             />
           )}
 

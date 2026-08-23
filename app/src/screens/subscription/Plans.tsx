@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { PLANS, ANNUAL_DISCOUNT } from '../../content/plans';
 import { useSettingsStore } from '../../store/settingsStore';
 
@@ -85,7 +85,7 @@ export function Plans() {
 
       <Modal open={confirmed} onClose={() => setConfirmed(false)}>
         <div className="flex flex-col items-center gap-3 text-center">
-          <Mascot pose="comemorando" size={100} />
+          <MascotOficial size={100} />
           <h2 className="font-display text-xl font-extrabold text-navy">Assinatura confirmada!</h2>
           <p className="text-navy/70">
             Plano {PLANS.find((p) => p.id === selected)?.name} ({cycle}) ativado com sucesso.

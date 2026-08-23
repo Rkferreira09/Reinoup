@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import type { AgeBand } from '../../content/types';
@@ -25,7 +25,7 @@ export function ChildOnboarding() {
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-cream px-6 pb-8 pt-10 text-center safe-top">
-      <Mascot pose="feliz" size={110} />
+      <MascotOficial size={110} />
       <h1 className="font-display mt-4 text-2xl font-extrabold text-navy">Vamos conhecer a criança!</h1>
       <p className="mt-1 text-navy/70">Isso ajuda a personalizar a jornada.</p>
 

@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
 import { useProgressStore } from '../../store/progressStore';
 import { MISSIONS } from '../../content/missions';
-import { lockParentArea } from './ParentGuard';
+import { lockParentArea } from '../../lib/parent-session';
 
 const MENU = [
   { to: '/pais/relatorio', label: 'Relatório de atividades', icon: '📋' },
@@ -40,7 +40,7 @@ export function ParentHome() {
 
       <div className="flex flex-col gap-4 px-4">
         <Card className="flex items-center gap-3">
-          <Mascot size={56} animated={false} />
+          <MascotOficial size={56} />
           <div className="flex-1">
             <p className="font-display font-bold text-navy">{childProfile?.name}</p>
             <p className="text-sm text-navy/60">{childProfile?.age} anos</p>

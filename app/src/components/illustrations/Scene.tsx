@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import type { SceneConfig, Motif } from '../../content/types';
+import { getStoryArt } from '../../lib/story-art';
+import { MascotOficial } from '../mascot/MascotOficial';
 import { MotifIcon } from './MotifIcon';
 
 const SKY_GRADIENTS: Record<SceneConfig['sky'], [string, string]> = {
@@ -25,9 +28,35 @@ interface SceneProps {
   height?: number;
   /** Explicit pixel width. Omit to fill the parent's width (default). */
   width?: number;
+  artId?: string;
+  showGuide?: boolean;
 }
 
-export function Scene({ scene, className = '', height = 200, width }: SceneProps) {
+export function Scene({ scene, className = '', height = 200, width, artId, showGuide = false }: SceneProps) {
+  const [failedArtId, setFailedArtId] = useState<string | null>(null);
+  const art = getStoryArt(artId);
+  const useArt = art && failedArtId !== artId;
+
+  if (useArt) {
+    const guideSize = Math.min(126, Math.max(64, Math.round(height * 0.5)));
+    return (
+      <div className={`relative overflow-hidden rounded-2xl bg-cream-dark ${className}`} style={{ height, width: width ?? '100%' }}>
+        <img
+          src={art.src}
+          alt={art.alt}
+          onError={() => setFailedArtId(artId ?? null)}
+          className="h-full w-full object-cover"
+          style={{ objectPosition: art.focalPoint }}
+        />
+        {showGuide && art.guide && (
+          <div className={`pointer-events-none absolute bottom-0 ${art.guide === 'left' ? 'left-2' : 'right-2'} drop-shadow-lg`}>
+            <MascotOficial size={guideSize} />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const [skyTop, skyBottom] = SKY_GRADIENTS[scene.sky];
   const gradId = `sky-${scene.sky}-${scene.ground}`;
   const motifs = scene.motifs.slice(0, 3);

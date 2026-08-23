@@ -1,5 +1,6 @@
-﻿import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '../../components/ui/Card';
+import { Button } from '../../components/ui/Button';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Mascot } from '../../components/mascot/Mascot';
 import { useAuthStore } from '../../store/authStore';
@@ -11,7 +12,9 @@ import { getAvatarItem } from '../../content/avatar-items';
 import { STORIES } from '../../content/stories';
 
 export function Profile() {
+  const navigate = useNavigate();
   const childProfile = useAuthStore((s) => s.childProfile);
+  const logout = useAuthStore((s) => s.logout);
   const xp = useProgressStore((s) => s.xp);
   const avatar = useProgressStore((s) => s.avatar);
   const badgesUnlocked = useProgressStore((s) => s.badgesUnlocked);
@@ -24,6 +27,11 @@ export function Profile() {
   const accessoryItem = getAvatarItem(avatar.accessory ?? '');
   const backgroundItem = getAvatarItem(avatar.background);
   const storiesCompleted = STORIES.filter((s) => stories[s.id]?.completed).length;
+
+  function handleLogout() {
+    logout();
+    navigate('/login', { replace: true });
+  }
 
   return (
     <div className="flex flex-col gap-5 px-4 pb-8 pt-4 safe-top">
@@ -67,6 +75,10 @@ export function Profile() {
         <LinhaDoPerfil to="/app/planos" icone="desafios" titulo="Planos" />
         <LinhaDoPerfil to="/pais/pin" icone="protecao" titulo="Área dos Pais" destaque />
       </div>
+
+      <Button variant="secondary" full onClick={handleLogout}>
+        Sair da conta
+      </Button>
     </div>
   );
 }
@@ -85,5 +97,4 @@ function LinhaDoPerfil({ to, icone, titulo, destaque }: { to: string; icone: Bra
     </Link>
   );
 }
-
 

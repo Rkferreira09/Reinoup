@@ -99,7 +99,7 @@ export function PuzzleGame() {
                   }}
                 >
                   <div style={{ width: BOARD_SIZE, height: BOARD_SIZE, marginTop: -targetRow * TILE, marginLeft: -targetCol * TILE }}>
-                    <Scene scene={story.cover} height={BOARD_SIZE} className="rounded-none" />
+                    <Scene scene={story.cover} artId={story.id} height={BOARD_SIZE} className="rounded-none" />
                   </div>
                 </motion.button>
               );

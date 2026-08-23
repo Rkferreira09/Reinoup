@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { CoinBadge } from '../../components/ui/CoinBadge';
+import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { useProgressStore } from '../../store/progressStore';
 
 const GAMES = [
@@ -17,6 +18,9 @@ export function GamesHub() {
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Jogos" backTo="/app" right={<CoinBadge coins={coins} />} />
       <div className="flex flex-col gap-4 px-4">
+        <SpeechBubble pose="feliz" tone="info">
+          Aprender brincando fica ainda mais divertido!
+        </SpeechBubble>
         {GAMES.map((g) => (
           <Link key={g.to} to={g.to} className={`flex items-center gap-4 rounded-[var(--radius-card)] p-5 ${g.color}`}>
             <span className="text-4xl">{g.icon}</span>

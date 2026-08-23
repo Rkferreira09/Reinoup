@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { BrandIcon, type BrandIconName } from '../../components/illustrations/BrandIcon';
+import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { useProgressStore } from '../../store/progressStore';
 import { SHIELD_COST_COINS } from '../../lib/economy';
 
@@ -35,6 +36,9 @@ export function DailyChallenges() {
       <TopBar title="Desafios diários" backTo="/app" />
 
       <div className="flex flex-col gap-4 px-4">
+        <SpeechBubble pose="feliz" tone="info">
+          Cada desafio é um passo na sua jornada. Vamos juntos?
+        </SpeechBubble>
         <p className="text-center text-base font-semibold leading-snug text-navy/70">
           Complete os desafios e ganhe moedas e XP!
         </p>

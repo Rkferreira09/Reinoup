@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
 
 export function Login() {
@@ -35,7 +36,7 @@ export function Login() {
       <TopBar backTo="/publico" />
       <div className="flex flex-1 flex-col px-6 pb-8">
         <div className="mb-6 text-center">
-          <span className="text-5xl">👑</span>
+          <MascotOficial pose="acenando" size={110} />
           <h1 className="font-display mt-2 text-2xl font-extrabold text-navy">Bem-vindo(a) ao ReinoUp!</h1>
         </div>
 
