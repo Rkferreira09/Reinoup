@@ -131,7 +131,8 @@ export const gn01Criacao: Story = {
     {
       id: 'gn-01-q1',
       question: 'O que Deus criou primeiro?',
-      options: ['A luz', 'Os animais', 'As pessoas', 'As montanhas'],
+      options: ['A luz', 'Os animais', 'As plantas', 'As montanhas'],
+      optionIcons: ['star', 'lion', 'plant', 'mountain'],
       correctIndex: 0,
       explanation: 'Deus disse "Haja luz!" e a luz apareceu. Foi a primeira coisa que Ele criou.',
     },
@@ -139,6 +140,7 @@ export const gn01Criacao: Story = {
       id: 'gn-01-q2',
       question: 'Quem Deus criou por último?',
       options: ['Os peixes', 'As estrelas', 'O ser humano', 'As árvores'],
+      optionIcons: ['big-fish', 'star', 'shepherd-boy', 'fruit-tree'],
       correctIndex: 2,
       explanation: 'Deus criou Adão e Eva por último — sua criação mais especial.',
     },
@@ -171,6 +173,21 @@ export const gn01Criacao: Story = {
     },
     {
       id: 'gn-01-q6',
+      question: 'Onde os peixes foram colocados por Deus?',
+      options: ['No céu', 'Nas águas', 'Nas montanhas', 'No deserto'],
+      optionIcons: ['star', 'storm-waves', 'mountain', 'tent'],
+      correctIndex: 1,
+      explanation: 'Deus encheu as águas de peixes e o céu de aves, cada um no seu lugar.',
+    },
+    {
+      id: 'gn-01-q7',
+      question: 'O que Deus disse quando olhou para tudo o que tinha feito?',
+      options: ['"Ficou muito bom!"', '"Vou recomeçar."', '"Está faltando algo."', 'Não disse nada.'],
+      correctIndex: 0,
+      explanation: 'Deus viu tudo o que havia feito e disse que era muito bom.',
+    },
+    {
+      id: 'gn-01-q8',
       question: 'O que essa história ensina sobre você?',
       options: [
         'Que você foi criado por Deus, com propósito',

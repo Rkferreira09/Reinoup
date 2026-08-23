@@ -68,6 +68,12 @@ export interface QuizQuestion {
   correctIndex: number;
   /** Sempre explica a resposta certa. Nunca julga o erro. */
   explanation: string;
+  /**
+   * Uma figura por opção — o quiz vira grade 2×2 ilustrada.
+   * Essencial para 5 a 7 anos, que ainda não leem sozinhos.
+   * Se presente, precisa ter o mesmo tamanho de `options`.
+   */
+  optionIcons?: Motif[];
 }
 
 export interface StoryChoice {

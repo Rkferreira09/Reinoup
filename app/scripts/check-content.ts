@@ -63,7 +63,15 @@ for (const story of STORIES) {
   if (story.chapters.length < 4 || story.chapters.length > 5) {
     avisos.push(`${tag} ${story.chapters.length} capítulos (alvo 4–5)`);
   }
-  if (story.quiz.length !== 6) avisos.push(`${tag} quiz com ${story.quiz.length} perguntas (alvo 6)`);
+  if (story.quiz.length !== 8) avisos.push(`${tag} quiz com ${story.quiz.length} perguntas (alvo 8)`);
+
+  for (const q of story.quiz) {
+    if (q.optionIcons && q.optionIcons.length !== q.options.length) {
+      erros.push(`${tag} ${q.id}: ${q.optionIcons.length} figuras para ${q.options.length} opções`);
+    }
+  }
+  const ilustradas = story.quiz.filter((q) => q.optionIcons).length;
+  if (ilustradas < 2) avisos.push(`${tag} só ${ilustradas} perguntas ilustradas (alvo mínimo 2, para quem não lê)`);
   if (story.memoryPairs.length !== 6) avisos.push(`${tag} ${story.memoryPairs.length} memoryPairs (alvo 6)`);
   if (story.orderSteps.length !== 5) avisos.push(`${tag} ${story.orderSteps.length} orderSteps (alvo 5)`);
 

@@ -71,7 +71,8 @@ export function Quiz() {
         <AnimatePresence mode="wait">
           <motion.div key={`${currentQIndex}-${pointer}`} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} className="flex flex-col gap-4">
             <h2 className="font-display text-center text-xl font-bold text-navy">{question.question}</h2>
-            <div className="grid grid-cols-1 gap-3">
+            {/* Com figuras vira grade 2×2 — a criança que ainda não lê responde pela imagem. */}
+            <div className={question.optionIcons ? 'grid grid-cols-2 gap-3' : 'grid grid-cols-1 gap-3'}>
               {question.options.map((opt, i) => (
                 <ChoiceCard
                   key={i}
@@ -80,6 +81,7 @@ export function Quiz() {
                   revealed={revealed && (selected === i || i === question.correctIndex)}
                   disabled={revealed}
                   onClick={() => selectOption(i)}
+                  icon={question.optionIcons?.[i]}
                 >
                   {opt}
                 </ChoiceCard>

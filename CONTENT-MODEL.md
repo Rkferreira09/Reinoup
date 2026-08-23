@@ -1,4 +1,4 @@
-# Modelo de Conteúdo — ReinoUp
+﻿# Modelo de Conteúdo — ReinoUp
 
 Como o conteúdo bíblico do ReinoUp é estruturado, escrito e adicionado.
 Vale para Gênesis e para todo livro que vier depois.
@@ -84,7 +84,8 @@ Regras fixas. É o que faz 39 histórias parecerem uma coisa só.
 | Página `8-10` | 50 a 90 palavras · pode ter diálogo e subordinada |
 | Corte | Todo capítulo termina em gancho, exceto o último |
 | Ponto de escolha | Exatamente 1, no **penúltimo** capítulo |
-| Quiz | 6 perguntas: 2 fato · 2 compreensão · 1 versículo · 1 aplicação |
+| Quiz | 8 perguntas: 3 fato · 3 compreensão · 1 versículo · 1 aplicação |
+| Quiz ilustrado | Mínimo 2 perguntas com `optionIcons` (grade 2×2 com figura) |
 | Feedback do erro | Sempre explica a resposta certa. **Nunca julga.** |
 | `wordBank` | 6 a 8 palavras · MAIÚSCULAS · sem acento · 4 a 8 letras |
 | `memoryPairs` | Exatamente 6 |
@@ -102,7 +103,27 @@ infantil o texto do de 5.
 
 ---
 
-## 5. Segurança editorial
+## 5. Ilustração
+
+As 21 telas de referência (`02. Reino UP/02. Telas/`) são construídas sobre pintura
+raster. Fazer isso em toda cena de capítulo custaria ~300 imagens só em Gênesis.
+
+Estratégia adotada — pintura onde o impacto conta, vetor onde a escala pesa:
+
+| Onde | Formato | Volume em Gênesis |
+|---|---|---|
+| Capa da história | pintura | 39 |
+| Figuras do quiz (`optionIcons`) | vetor (`MotifIcon`) | reutilizável |
+| Cena de capítulo | vetor (`Scene`) | 0 imagens |
+| Mascote em momento de impacto | render 3D | poucas poses |
+
+`MotifIcon` é o catálogo compartilhado: cada motivo é desenhado uma vez e serve
+cena, jogo da memória e quiz ilustrado. Motivo novo entra em `types.ts` **e**
+ganha um SVG em `MotifIcon.tsx`.
+
+---
+
+## 6. Segurança editorial
 
 Marque `sensibilidade` e adapte a narração de `5-7`.
 
@@ -116,7 +137,7 @@ Marque `sensibilidade` e adapte a narração de `5-7`.
 
 ---
 
-## 6. Os valores
+## 7. Os valores
 
 `content/valores.ts` — a taxonomia oficial de caráter. Cada história tem **um**
 `valor` primário; secundários são opcionais.
@@ -130,7 +151,7 @@ da lição, não a taxonomia.
 
 ---
 
-## 7. Como adicionar uma história
+## 8. Como adicionar uma história
 
 1. Confirme o slot no `GENESIS_ROADMAP` (id, ordem, valor, sensibilidade).
 2. Crie `content/seasons/<livro>/NN-slug.ts` exportando um `Story`.
@@ -138,15 +159,17 @@ da lição, não a taxonomia.
 4. Adicione o versículo `v-<livro>-NN` em `verses.ts`.
 5. Se a cena pedir um motivo visual novo, adicione em `types.ts` **e** desenhe
    o SVG em `components/illustrations/MotifIcon.tsx`.
-6. `npm run build` — o TypeScript recusa história incompleta.
+6. `bun run check` — TypeScript e verificador recusam história incompleta.
 7. Teste na Sala Zero antes de considerar pronta.
 
 ---
 
-## 8. Desbloqueio
+## 9. Desbloqueio
 
 Temporada sequencial (`sequencial: true`): a fase N+1 abre quando a N é
 concluída. A trilha mostra as fases travadas com cadeado desde o primeiro dia —
 ver o que falta é o que puxa a criança.
 
 Lógica em `stories.ts`: `isStoryUnlocked()` e `proximaHistoria()`.
+
+

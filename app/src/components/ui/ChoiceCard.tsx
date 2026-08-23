@@ -1,37 +1,51 @@
 import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import type { Motif } from '../../content/types';
+import { MotifIcon } from '../illustrations/MotifIcon';
 
 interface ChoiceCardProps {
-  children: ReactNode;
+  children: React.ReactNode;
   selected?: boolean;
-  correct?: boolean; // only meaningful once revealed
+  correct?: boolean;
   revealed?: boolean;
   onClick?: () => void;
   disabled?: boolean;
+  /** Quando presente, o card vira ilustrado: figura em cima, rótulo embaixo. */
+  icon?: Motif;
 }
 
-export function ChoiceCard({ children, selected, correct, revealed, onClick, disabled }: ChoiceCardProps) {
+export function ChoiceCard({ children, selected, correct, revealed, onClick, disabled, icon }: ChoiceCardProps) {
   let stateClasses = 'border-navy/10 bg-white';
   if (revealed && selected && correct) stateClasses = 'border-green bg-green-light';
   // Errar não pune: sem vermelho, sem alarme. Azul da marca = "vamos de novo".
   else if (revealed && selected && !correct) stateClasses = 'border-retry bg-retry-soft';
   else if (selected) stateClasses = 'border-orange bg-orange-light/20';
 
+  /* Só o acerto ganha selo. O erro é explicado pelo cordeirinho, não carimbado. */
+  const selo = revealed && selected && correct && (
+    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green text-white">✓</span>
+  );
+
   return (
     <motion.button
       whileTap={disabled ? undefined : { scale: 0.98 }}
       onClick={onClick}
       disabled={disabled}
-      className={`relative w-full rounded-2xl border-2 p-4 text-left font-semibold text-navy-deep transition-colors ${stateClasses}`}
+      className={`relative w-full rounded-2xl border-2 font-semibold text-navy-deep transition-colors ${
+        icon ? 'p-3 text-center' : 'p-4 text-left'
+      } ${stateClasses}`}
     >
-      <div className="flex items-center justify-between gap-3">
-        <span>{children}</span>
-        {revealed && selected && (
-          <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white ${correct ? 'bg-green' : 'bg-red-soft'}`}>
-            {correct ? '✓' : '✕'}
-          </span>
-        )}
-      </div>
+      {icon ? (
+        <div className="flex flex-col items-center gap-2">
+          <div className="absolute right-2 top-2">{selo}</div>
+          <MotifIcon motif={icon} size={72} />
+          <span className="text-sm leading-tight">{children}</span>
+        </div>
+      ) : (
+        <div className="flex items-center justify-between gap-3">
+          <span>{children}</span>
+          {selo}
+        </div>
+      )}
     </motion.button>
   );
 }
