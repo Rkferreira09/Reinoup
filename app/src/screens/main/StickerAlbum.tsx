@@ -1,5 +1,6 @@
 import { TopBar } from '../../components/ui/TopBar';
 import { MotifIcon } from '../../components/illustrations/MotifIcon';
+import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { useProgressStore } from '../../store/progressStore';
 import type { Motif } from '../../content/types';
 
@@ -18,6 +19,9 @@ export function StickerAlbum() {
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Álbum de Adesivos" backTo="/app" />
       <div className="px-4">
+        <SpeechBubble pose="comemorando" tone="info">
+          Cada descoberta pode virar um adesivo para a sua coleção!
+        </SpeechBubble>
         <p className="mb-4 text-center text-sm font-semibold text-navy/60">
           {Math.min(unlockedCount, ALBUM_MOTIFS.length)} de {ALBUM_MOTIFS.length} adesivos
         </p>

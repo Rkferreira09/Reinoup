@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { simpleHash } from '../lib/hash';
+import { lockParentArea } from '../lib/parent-session';
 import type { AgeBand } from '../content/types';
 
 export type Audience = 'crianca' | 'pai' | null;
@@ -71,7 +72,10 @@ export const useAuthStore = create<AuthState>()(
         });
       },
 
-      logout: () => set({ isAuthenticated: false }),
+      logout: () => {
+        lockParentArea();
+        set({ isAuthenticated: false });
+      },
 
       completeChildOnboarding: (profile) => set({ childProfile: profile }),
 

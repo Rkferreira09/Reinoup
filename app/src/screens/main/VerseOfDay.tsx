@@ -55,6 +55,9 @@ export function VerseOfDay() {
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Versículo do dia" backTo="/app" />
       <div className="flex flex-col gap-5 px-4">
+        <SpeechBubble pose="feliz" tone="info">
+          Guarde a Palavra no coração, uma palavra de cada vez.
+        </SpeechBubble>
         <Card>
           <p className="font-display text-xl font-bold leading-snug text-navy">"{text}"</p>
           <p className="mt-1 text-sm font-semibold text-navy/60">{verse.reference}</p>

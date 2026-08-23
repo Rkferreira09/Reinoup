@@ -3,6 +3,7 @@ import { TopBar } from '../../components/ui/TopBar';
 import { Card } from '../../components/ui/Card';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Button } from '../../components/ui/Button';
+import { SpeechBubble } from '../../components/mascot/SpeechBubble';
 import { MISSIONS } from '../../content/missions';
 import { useProgressStore } from '../../store/progressStore';
 import { getDerivedMissionProgress } from '../../lib/missions-engine';
@@ -26,6 +27,9 @@ export function Missions() {
     <div className="flex min-h-screen flex-col bg-cream pb-8">
       <TopBar title="Missões" backTo="/app" />
       <div className="flex flex-col gap-4 px-4">
+        <SpeechBubble pose="pensando" tone="info">
+          Qual missão vamos descobrir primeiro?
+        </SpeechBubble>
         {bigMissions.map((m) => {
           const current = getDerivedMissionProgress(m.id, progress);
           return (

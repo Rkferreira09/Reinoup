@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { useAuthStore } from '../../store/authStore';
-import { unlockParentArea } from './ParentGuard';
+import { unlockParentArea } from '../../lib/parent-session';
 
 export function ParentPinGate() {
   const navigate = useNavigate();

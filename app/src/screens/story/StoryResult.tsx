@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { getStory } from '../../content/stories';
 import { useProgressStore } from '../../store/progressStore';
 
@@ -22,7 +22,7 @@ export function StoryResult() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-navy px-8 text-center text-white">
-      <Mascot pose={pct >= 0.7 ? 'comemorando' : 'feliz'} size={130} />
+      <MascotOficial size={130} />
       <h1 className="font-display text-2xl font-extrabold">{message}</h1>
       <p className="font-display text-4xl font-extrabold text-gold-light">
         {score}/{total}

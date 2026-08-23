@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mascot } from '../mascot/Mascot';
+import { MascotOficial } from '../mascot/MascotOficial';
 import type { AppLockState } from '../../hooks/useAppLock';
 
 const MESSAGES: Record<NonNullable<AppLockState['reason']>, { title: string; body: string }> = {
@@ -16,7 +16,7 @@ export function AppLockOverlay({ reason }: { reason: NonNullable<AppLockState['r
       animate={{ opacity: 1 }}
       className="fixed inset-0 z-[70] flex flex-col items-center justify-center gap-4 bg-navy-deep/95 px-8 text-center text-white"
     >
-      <Mascot pose="pensando" size={120} />
+      <MascotOficial size={120} />
       <h1 className="font-display text-2xl font-extrabold">{msg.title}</h1>
       <p className="max-w-xs text-white/80">{msg.body}</p>
       <span className="mt-2 text-4xl">⏰</span>

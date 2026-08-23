@@ -1,20 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
-
-const FLAG = 'reinoup-pais-unlocked';
-
-export function unlockParentArea() {
-  sessionStorage.setItem(FLAG, 'true');
-}
-
-export function lockParentArea() {
-  sessionStorage.removeItem(FLAG);
-}
-
-function isParentAreaUnlocked() {
-  return sessionStorage.getItem(FLAG) === 'true';
-}
+import { useAuthStore } from '../../store/authStore';
+import { isParentAreaUnlocked } from '../../lib/parent-session';
 
 export function ParentGuard() {
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
   if (!isParentAreaUnlocked()) return <Navigate to="/pais/pin" replace />;
   return <Outlet />;
 }

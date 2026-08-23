@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useProgressStore } from '../../store/progressStore';
 
 export function RewardChest() {
@@ -28,6 +29,7 @@ export function RewardChest() {
     <div className="flex min-h-screen flex-col bg-navy text-white">
       <TopBar dark title="Baú de Recompensas" backTo="/app/desafios" />
       <div className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center">
+        <MascotOficial size={96} recorte="busto" />
         <motion.div
           animate={opening ? { rotate: [0, -4, 4, -4, 0] } : { scale: [1, 1.15, 1] }}
           transition={{ duration: opening ? 0.6 : 0.5, repeat: opening ? Infinity : 0 }}

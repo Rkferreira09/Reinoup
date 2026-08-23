@@ -27,7 +27,7 @@ export function UnlockedStoryPicker({ onPick }: UnlockedStoryPickerProps) {
       {unlocked.map((story) => (
         <button key={story.id} onClick={() => onPick(story.id)} className="text-left">
           <Card padded={false} className="flex items-center gap-3 overflow-hidden">
-            <Scene scene={story.cover} height={64} width={80} className="shrink-0 rounded-none rounded-l-[var(--radius-card)]" />
+            <Scene scene={story.cover} artId={story.id} height={64} width={80} className="shrink-0 rounded-none rounded-l-[var(--radius-card)]" />
             <p className="font-display font-bold text-navy">{story.title}</p>
           </Card>
         </button>

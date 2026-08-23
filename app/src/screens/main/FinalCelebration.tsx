@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
-import { Mascot } from '../../components/mascot/Mascot';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useProgressStore } from '../../store/progressStore';
 
 export function FinalCelebration() {
@@ -11,7 +11,7 @@ export function FinalCelebration() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-gradient-to-b from-navy-deep to-navy px-8 text-center text-white">
       <span className="text-5xl">👑</span>
-      <Mascot pose="comemorando" size={130} />
+      <MascotOficial size={130} />
       <h1 className="font-display text-3xl font-extrabold text-gold-light">Você é demais!</h1>
       <p className="max-w-xs text-white/85">Continue assim na sua jornada com Deus!</p>
       <div className="mt-2 flex gap-4">

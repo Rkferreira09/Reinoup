@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
+import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
 
 export function Register() {
@@ -24,6 +25,7 @@ export function Register() {
     <div className="flex min-h-screen flex-col bg-cream">
       <TopBar backTo="/login" />
       <div className="flex flex-1 flex-col px-6 pb-8">
+        <MascotOficial size={88} recorte="busto" className="mx-auto" />
         <h1 className="font-display mb-6 text-2xl font-extrabold text-navy">Criar conta dos pais</h1>
         <p className="mb-6 text-sm text-navy/70">
           Essa conta é do responsável. Depois vamos configurar o perfil da criança.
