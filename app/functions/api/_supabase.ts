@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Gravação de assinaturas a partir dos webhooks de pagamento.
  *
  * Usa PostgREST direto, sem o supabase-js: a Function precisa de uma única
@@ -89,14 +89,27 @@ export async function registrarAssinaturaPaga(
 }
 
 /**
- * Lê plano e ciclo de um reference_id no formato que criamos em
- * pagbank-criar-pedido.ts: `reinoup-<plano>-<ciclo>-<timestamp>`.
+ * Lê plano, ciclo e família de um reference_id criado em
+ * pagbank-criar-pedido.ts:
+ *
+ *   reinoup-<plano>-<ciclo>-<timestamp>-<familyId|anon>
+ *
+ * O familyId é um UUID e **tem hífen dentro**, por isso vem por último e é
+ * remontado com join. Fatiar por índice fixo quebraria no primeiro pagamento
+ * de uma conta real.
  */
-export function lerReferencia(referencia: string): { plano: PlanoId; ciclo: Ciclo } | null {
+export function lerReferencia(
+  referencia: string
+): { plano: PlanoId; ciclo: Ciclo; familyId: string | null } | null {
   const partes = referencia.split('-');
-  const plano = partes[1];
-  const ciclo = partes[2];
+  const [prefixo, plano, ciclo] = partes;
+  if (prefixo !== 'reinoup') return null;
+
   const planoValido = plano === 'essencial' || plano === 'completo' || plano === 'familia';
   const cicloValido = ciclo === 'mensal' || ciclo === 'anual';
-  return planoValido && cicloValido ? { plano, ciclo } : null;
+  if (!planoValido || !cicloValido) return null;
+
+  const familia = partes.slice(4).join('-');
+  return { plano, ciclo, familyId: familia && familia !== 'anon' ? familia : null };
 }
+

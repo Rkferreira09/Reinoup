@@ -1,10 +1,11 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { TopBar } from '../../components/ui/TopBar';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { exportAllData, eraseAllData } from '../../lib/data-export';
 import { useAuthStore } from '../../store/authStore';
+import { sairDaConta } from '../../lib/auth-supabase';
 
 export function Settings() {
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -32,7 +33,7 @@ export function Settings() {
           </div>
         </Card>
 
-        <button onClick={logout} className="rounded-2xl bg-white p-4 text-center font-display font-bold text-navy shadow-[var(--shadow-card)]">
+        <button onClick={() => { void sairDaConta(); logout(); }} className="rounded-2xl bg-white p-4 text-center font-display font-bold text-navy shadow-[var(--shadow-card)]">
           Sair da conta
         </button>
       </div>
@@ -55,3 +56,4 @@ export function Settings() {
     </div>
   );
 }
+

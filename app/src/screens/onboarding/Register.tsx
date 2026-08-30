@@ -1,22 +1,40 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
+import { authRemotoDisponivel, cadastrarResponsavel } from '../../lib/auth-supabase';
 
 export function Register() {
   const navigate = useNavigate();
   const register = useAuthStore((s) => s.register);
+  const setFamilyId = useAuthStore((s) => s.setFamilyId);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [enviando, setEnviando] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (password !== confirm) return setError('As senhas não coincidem.');
+
+    setError(null);
+    setEnviando(true);
+
+    // Com Supabase configurado a conta é de verdade; sem ele, segue local.
+    if (authRemotoDisponivel) {
+      const remoto = await cadastrarResponsavel(email, password);
+      if (!remoto.ok) {
+        setEnviando(false);
+        return setError(remoto.error ?? 'Não foi possível criar a conta.');
+      }
+      setFamilyId(remoto.familyId ?? null);
+    }
+
     const result = register(email, password);
+    setEnviando(false);
     if (!result.ok) return setError(result.error ?? 'Não foi possível criar a conta.');
     navigate('/onboarding-crianca', { replace: true });
   }
@@ -68,11 +86,12 @@ export function Register() {
 
           {error && <p className="text-sm font-semibold text-red-soft">{error}</p>}
 
-          <Button type="submit" full size="lg" className="mt-2">
-            Criar conta
+          <Button type="submit" full size="lg" className="mt-2" disabled={enviando}>
+            {enviando ? 'Criando conta...' : 'Criar conta'}
           </Button>
         </form>
       </div>
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Cria um pedido no PagBank com QR Code PIX para uma assinatura do ReinoUp.
  *
  * Roda como Cloudflare Pages Function, no mesmo padrão da integração Stripe.
@@ -62,7 +62,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     return Response.json({ error: 'Corpo da requisição inválido.' }, { status: 400 });
   }
 
-  const { planId, cycle, nome, email, cpf } = (body ?? {}) as Record<string, unknown>;
+  const { planId, cycle, nome, email, cpf, familyId } = (body ?? {}) as Record<string, unknown>;
 
   if (!isPlanId(planId) || !isCycle(cycle)) {
     return Response.json({ error: 'planId ou cycle inválido.' }, { status: 400 });
@@ -88,7 +88,13 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
       : Math.round(plan.monthlyPrice * 100);
 
   const expiraEm = new Date(Date.now() + MINUTOS_ATE_EXPIRAR * 60_000).toISOString();
-  const referenceId = `reinoup-${planId}-${cycle}-${Date.now()}`;
+  // O familyId viaja no reference_id para o webhook saber de quem é o pagamento.
+  // Sem conta remota vai 'anon' e a vinculação fica manual.
+  //
+  // Ele fica por ÚLTIMO de propósito: é um UUID e tem hífen dentro, então quem
+  // lê precisa juntar o resto — ver `lerReferencia` em _supabase.ts.
+  const familia = typeof familyId === 'string' && familyId.length > 0 ? familyId : 'anon';
+  const referenceId = `reinoup-${planId}-${cycle}-${Date.now()}-${familia}`;
 
   const pedido = {
     reference_id: referenceId,
@@ -158,3 +164,4 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
  * a primeira venda. Antes de escalar, migrar para Assinaturas:
  * https://developer.pagbank.com.br/reference/criar-assinatura
  */
+

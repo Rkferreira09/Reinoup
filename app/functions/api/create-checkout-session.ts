@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Cria uma sessão do Stripe Checkout para uma assinatura do ReinoUp.
  *
  * Roda como Cloudflare Pages Function (mesma infra que já publica o app —
@@ -52,7 +52,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     return Response.json({ error: 'Corpo da requisição inválido.' }, { status: 400 });
   }
 
-  const { planId, cycle } = (body ?? {}) as { planId?: unknown; cycle?: unknown };
+  const { planId, cycle, familyId } = (body ?? {}) as { planId?: unknown; cycle?: unknown; familyId?: unknown };
   if (!isPlanId(planId) || !isCycle(cycle)) {
     return Response.json({ error: 'planId ou cycle inválido.' }, { status: 400 });
   }
@@ -77,6 +77,10 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
   params.set('line_items[0][price_data][product_data][name]', `${plan.name} (${cycle})`);
   params.set('metadata[planId]', planId);
   params.set('metadata[cycle]', cycle);
+  // O webhook le isso para saber de qual familia e a assinatura.
+  if (typeof familyId === 'string' && familyId.length > 0) {
+    params.set('metadata[familyId]', familyId);
+  }
 
   const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
@@ -98,3 +102,4 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
 
   return Response.json({ url: data.url });
 };
+

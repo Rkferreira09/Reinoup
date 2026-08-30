@@ -21,6 +21,7 @@ export function Plans() {
   const [error, setError] = useState<string | null>(null);
   const [pixAberto, setPixAberto] = useState(false);
   const emailDaConta = useAuthStore((s) => s.email) ?? '';
+  const familyId = useAuthStore((s) => s.familyId);
 
   // Volta do Stripe Checkout: ?status=success confirma a assinatura de verdade;
   // ?status=cancelled só limpa a URL (o usuário desistiu no meio do pagamento).
@@ -50,7 +51,7 @@ export function Plans() {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId: selected, cycle }),
+        body: JSON.stringify({ planId: selected, cycle, familyId }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
@@ -138,6 +139,7 @@ export function Plans() {
         cycle={cycle}
         valorFormatado={priceFor(PLANS.find((p) => p.id === selected)?.monthlyPrice ?? 0)}
         emailPadrao={emailDaConta}
+        familyId={familyId}
         onFechar={() => setPixAberto(false)}
       />
 
@@ -162,4 +164,5 @@ export function Plans() {
     </div>
   );
 }
+
 

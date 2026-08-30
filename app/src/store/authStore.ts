@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { simpleHash } from '../lib/hash';
 import { lockParentArea } from '../lib/parent-session';
@@ -20,8 +20,11 @@ interface AuthState {
   passwordHash: string | null;
   childProfile: ChildProfile | null;
   parentPinHash: string | null;
+  /** id do responsavel no Supabase = family_id. Null no modo 100% local. */
+  familyId: string | null;
 
   setAudience: (a: Audience) => void;
+  setFamilyId: (id: string | null) => void;
   register: (email: string, password: string) => { ok: boolean; error?: string };
   login: (email: string, password: string) => { ok: boolean; error?: string };
   mockSocialLogin: (provider: 'google' | 'apple') => void;
@@ -41,6 +44,7 @@ export const useAuthStore = create<AuthState>()(
       passwordHash: null,
       childProfile: null,
       parentPinHash: null,
+      familyId: null,
 
       setAudience: (a) => set({ audience: a }),
 
@@ -50,6 +54,12 @@ export const useAuthStore = create<AuthState>()(
         set({ email, passwordHash: simpleHash(password), isAuthenticated: true });
         return { ok: true };
       },
+
+      /**
+       * Guarda o id do responsável no Supabase — é o mesmo `family_id` das
+       * tabelas. Amarra pagamento e progresso à conta certa.
+       */
+      setFamilyId: (id) => set({ familyId: id }),
 
       login: (email, password) => {
         const state = get();
@@ -95,3 +105,4 @@ export const useAuthStore = create<AuthState>()(
     { name: 'reinoup-auth' }
   )
 );
+

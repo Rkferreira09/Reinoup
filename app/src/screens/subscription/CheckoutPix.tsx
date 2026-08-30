@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Modal } from '../../components/ui/Modal';
 import { BrandIcon } from '../../components/illustrations/BrandIcon';
 
@@ -19,6 +19,8 @@ interface CheckoutPixProps {
   cycle: 'mensal' | 'anual';
   valorFormatado: string;
   emailPadrao?: string;
+  /** Amarra o pagamento a conta do responsavel. Null no modo 100% local. */
+  familyId?: string | null;
   onFechar: () => void;
 }
 
@@ -44,6 +46,7 @@ export function CheckoutPix({
   cycle,
   valorFormatado,
   emailPadrao = '',
+  familyId = null,
   onFechar,
 }: CheckoutPixProps) {
   const [nome, setNome] = useState('');
@@ -61,7 +64,7 @@ export function CheckoutPix({
       const res = await fetch('/api/pagbank-criar-pedido', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, cycle, nome, email, cpf }),
+        body: JSON.stringify({ planId, cycle, nome, email, cpf, familyId }),
       });
       const dados = (await res.json()) as Partial<PixGerado> & { error?: string };
       if (!res.ok || !dados.copiaECola) {
@@ -197,3 +200,4 @@ export function CheckoutPix({
     </Modal>
   );
 }
+

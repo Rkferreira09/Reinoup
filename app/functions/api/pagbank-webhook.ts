@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Recebe as notificações do PagBank sobre um pedido (PIX pago, expirado...).
  *
  * A URL é registrada em `notification_urls` na criação do pedido, então não há
@@ -83,10 +83,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
         plano: dados.plano,
         ciclo: dados.ciclo,
         valorCentavos: cobranca?.amount?.value ?? 0,
-        // TODO: amarrar à família. Hoje o pedido é criado sem sessão do pai,
-        // então a linha nasce com family_id nulo e a vinculação é manual.
-        // Some quando o login do responsável (Supabase Auth) estiver ligado.
-        familyId: null,
+        familyId: dados.familyId,
       });
 
       if (resultado.ok) {
@@ -102,3 +99,4 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
   // 200 sempre que a assinatura confere: o PagBank reenvia o que não for 2xx.
   return new Response('ok', { status: 200 });
 };
+

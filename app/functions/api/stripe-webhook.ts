@@ -9,11 +9,9 @@
  * Precisa de STRIPE_WEBHOOK_SECRET (o "signing secret" que o Stripe mostra ao
  * criar o endpoint) como variável de ambiente no Cloudflare Pages.
  *
- * ⚠️ Estado atual: valida a assinatura e responde 200, mas ainda NÃO persiste
- * o status da assinatura em banco — o Supabase ainda não está conectado ao
- * app (ver ROADMAP.md). Quando as credenciais chegarem, gravar aqui o evento
- * numa tabela `subscriptions` (family_id, plan, cycle, status, stripe_customer_id)
- * para o app parar de confiar só no localStorage para liberar conteúdo pago.
+ * Grava a assinatura confirmada em subscriptions (ver _supabase.ts). Sem
+ * SUPABASE_SERVICE_ROLE_KEY configurada, valida e responde 200, mas o plano
+ * nao libera -- e um 500 seria pior, porque o Stripe reenviaria para sempre.
  */
 
 import { registrarAssinaturaPaga, type Ciclo, type PlanoId, type SupabaseEnv } from './_supabase';
@@ -68,7 +66,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
         id?: string;
         amount_total?: number;
         subscription?: string;
-        metadata?: { planId?: string; cycle?: string };
+        metadata?: { planId?: string; cycle?: string; familyId?: string };
       };
     };
   };
@@ -90,8 +88,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
         plano,
         ciclo,
         valorCentavos: sessao.amount_total ?? 0,
-        // Mesma pendência do PagBank: sem sessão do pai, nasce sem família.
-        familyId: null,
+        familyId: sessao.metadata?.familyId ?? null,
       });
 
       if (!resultado.ok) {
@@ -107,4 +104,6 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
 
   return Response.json({ received: true });
 };
+
+
 

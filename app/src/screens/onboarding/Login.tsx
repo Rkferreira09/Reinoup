@@ -1,15 +1,17 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { useAuthStore } from '../../store/authStore';
+import { authRemotoDisponivel, entrarComoResponsavel } from '../../lib/auth-supabase';
 
 export function Login() {
   const navigate = useNavigate();
   const login = useAuthStore((s) => s.login);
   const mockSocialLogin = useAuthStore((s) => s.mockSocialLogin);
   const childProfile = useAuthStore((s) => s.childProfile);
+  const setFamilyId = useAuthStore((s) => s.setFamilyId);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -19,8 +21,18 @@ export function Login() {
     navigate(childProfile ? '/app' : '/onboarding-crianca', { replace: true });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError(null);
+
+    // Com Supabase configurado, a senha é conferida no servidor. Sem ele, o
+    // app segue no modo local — é o que mantém o protótipo utilizável.
+    if (authRemotoDisponivel) {
+      const remoto = await entrarComoResponsavel(email, password);
+      if (!remoto.ok) return setError(remoto.error ?? 'Não foi possível entrar.');
+      setFamilyId(remoto.familyId ?? null);
+    }
+
     const result = login(email, password);
     if (!result.ok) return setError(result.error ?? 'Não foi possível entrar.');
     afterAuth();
@@ -129,3 +141,5 @@ function AppleIcon() {
     </svg>
   );
 }
+
+
