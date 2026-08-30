@@ -1,4 +1,4 @@
-# ReinoUp — estado e caminho
+﻿# ReinoUp — estado e caminho
 
 Atualizado em 23/08/2026. Handoff para continuidade no GitHub Copilot Pro.
 
@@ -42,11 +42,18 @@ Ordem por bloco; **Caim e Abel (03) é o primeiro teste da matriz de
 sensibilidade**. Recomendado: lotes de 5, com teste na Sala Zero entre eles.
 
 ### 2. Backend — conectar o Supabase
+
+⚠️ **O projeto pausa sozinho.** No plano free o Supabase hiberna depois de ~1
+semana sem uso e volta com `status: INACTIVE`. Consultas falham com timeout ou
+"relation does not exist" enquanto ele restaura. Antes de concluir que algo
+sumiu, cheque o status do projeto.
 Hoje quem limpa o navegador perde o progresso do filho. Necessário antes de
 cobrar assinatura.
 - Auth do responsável + seleção de perfil da criança
 - Camada de sync local-first com fila offline
 - Migrar `learning_events` do log local para o banco
+- Ligar o webhook do PagBank e do Stripe na tabela `subscriptions` (ja existe,
+  com indice unico por provedor+referencia para o webhook ser idempotente)
 - Ranking real com convite por código e aprovação dos dois pais
 
 ### 3. Telas restantes contra o mockup
@@ -87,3 +94,4 @@ traz vinte famílias — é canal de aquisição, não só feature.
 - `arca-de-noe` e `jose-e-seus-irmaos` são de Gênesis e vivem no bônus por ora.
   Devem sair quando `gn-05` e o arco `gn-27..39` forem escritos.
 - Bundle acima de 500 kB: falta code splitting por rota.
+
