@@ -26,3 +26,15 @@ PAGBANK_TOKEN=
 #   sandbox    -> https://sandbox.api.pagseguro.com
 #   production -> https://api.pagseguro.com
 PAGBANK_ENV=sandbox
+
+# ---------------------------------------------------------------------------
+# Supabase — usado pelos webhooks para gravar a assinatura paga.
+# ---------------------------------------------------------------------------
+
+SUPABASE_URL=https://whjfaukvqutgmyozfesb.supabase.co
+
+# service_role: Supabase -> Project Settings -> API -> service_role (secret).
+# Passa por cima do RLS e le/escreve qualquer linha de qualquer familia.
+# NUNCA vai para o cliente nem para o repositorio. Sem ela, o webhook valida
+# a assinatura, responde 200 e apenas registra em log -- o plano nao libera.
+SUPABASE_SERVICE_ROLE_KEY=

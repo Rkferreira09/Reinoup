@@ -12,7 +12,9 @@
  * Docs: https://developer.pagbank.com.br/reference/confirmar-autenticidade-da-notificacao
  */
 
-interface Env {
+import { lerReferencia, registrarAssinaturaPaga, type SupabaseEnv } from './_supabase';
+
+interface Env extends SupabaseEnv {
   PAGBANK_TOKEN: string;
 }
 
@@ -66,16 +68,35 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     `[pagbank-webhook] pedido=${evento.id} ref=${evento.reference_id} status=${status} origem=${request.headers.get('x-product-origin')}`
   );
 
-  if (status === 'PAID') {
-    // TODO(assinatura): liberar o plano para a família.
-    //
-    // Depende da tabela `subscriptions` no Supabase, que ainda não existe.
-    // O `reference_id` foi montado como `reinoup-<plano>-<ciclo>-<timestamp>`
-    // em pagbank-criar-pedido.ts, então dá para extrair plano e ciclo daqui.
-    //
-    // Enquanto isso, um PIX pago NÃO libera nada no app automaticamente —
-    // a liberação é manual. Não anuncie cobrança automática antes disso.
-    console.log(`[pagbank-webhook] PAGAMENTO CONFIRMADO — liberar plano de ${evento.reference_id}`);
+  if (status === 'PAID' && evento.reference_id) {
+    const dados = lerReferencia(evento.reference_id);
+
+    if (!dados) {
+      // Pedido criado fora do nosso fluxo, ou formato mudou. Não é erro do
+      // PagBank: responder 200 evita reenvio infinito de algo insalvável.
+      console.error(`[pagbank-webhook] reference_id fora do padrão: ${evento.reference_id}`);
+    } else {
+      const resultado = await registrarAssinaturaPaga(env, {
+        provedor: 'pagbank',
+        referencia: evento.reference_id,
+        provedorId: evento.id,
+        plano: dados.plano,
+        ciclo: dados.ciclo,
+        valorCentavos: cobranca?.amount?.value ?? 0,
+        // TODO: amarrar à família. Hoje o pedido é criado sem sessão do pai,
+        // então a linha nasce com family_id nulo e a vinculação é manual.
+        // Some quando o login do responsável (Supabase Auth) estiver ligado.
+        familyId: null,
+      });
+
+      if (resultado.ok) {
+        console.log(`[pagbank-webhook] assinatura registrada: ${dados.plano}/${dados.ciclo}`);
+      } else {
+        // 500 faz o PagBank reenviar — é o que queremos se o banco caiu.
+        console.error(`[pagbank-webhook] falhou ao gravar: ${resultado.detalhe}`);
+        return new Response('Falha ao registrar assinatura.', { status: 500 });
+      }
+    }
   }
 
   // 200 sempre que a assinatura confere: o PagBank reenvia o que não for 2xx.
