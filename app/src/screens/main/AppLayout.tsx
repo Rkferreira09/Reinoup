@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { BottomNav } from '../../components/ui/BottomNav';
@@ -7,10 +7,12 @@ import { useAuthStore } from '../../store/authStore';
 import { useProgressStore } from '../../store/progressStore';
 import { useAppLock } from '../../hooks/useAppLock';
 import { useActivityTimer } from '../../hooks/useActivityTimer';
+import { iniciarSync } from '../../lib/sync';
 import { PageTransition } from '../../components/ui/PageTransition';
 
 export function AppLayout() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const familyId = useAuthStore((s) => s.familyId);
   const childProfile = useAuthStore((s) => s.childProfile);
   const ensureFreshDaily = useProgressStore((s) => s.ensureFreshDaily);
   const lock = useAppLock();
@@ -21,6 +23,9 @@ export function AppLayout() {
   useEffect(() => {
     ensureFreshDaily();
   }, [ensureFreshDaily]);
+
+  // Sync do progresso: sobe quando há conta remota, e é inerte sem ela.
+  useEffect(() => iniciarSync(), [familyId, childProfile]);
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
   if (!childProfile) return <Navigate to="/onboarding-crianca" replace />;
@@ -39,3 +44,4 @@ export function AppLayout() {
     </div>
   );
 }
+
