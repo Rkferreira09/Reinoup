@@ -21,6 +21,14 @@ Atualizado em 23/08/2026. Handoff para continuidade no GitHub Copilot Pro.
 - Iconografia da marca (9 ícones SVG) no lugar de emoji
 - Telas reconstruídas contra o mockup: **Home · Desafios Diários · Lista de Histórias · Perfil · Quiz · Splash · Seleção de Perfil**
 
+**Pagamento e assinatura**
+- Stripe (cartão) e PagBank (PIX) como Cloudflare Pages Functions
+- Webhooks com assinatura verificada e upsert idempotente
+- Tabela `subscriptions` com RLS; `plano_ativo()` respeita `vigente_ate`
+- Login do responsável no Supabase, convivendo com o modo local
+- Paywall real: 3 fases livres em Gênesis, bônus só para assinante — travado
+  também na rota, não só na lista
+
 **Correções de produto**
 - Quiz ilustrado em grade 2×2 (essencial para quem ainda não lê)
 - Removido o "✕" vermelho da resposta errada
@@ -41,19 +49,17 @@ O app está estruturalmente pronto e vazio. Cada aula segue `CONTENT-MODEL.md`.
 Ordem por bloco; **Caim e Abel (03) é o primeiro teste da matriz de
 sensibilidade**. Recomendado: lotes de 5, com teste na Sala Zero entre eles.
 
-### 2. Backend — conectar o Supabase
+### 2. Backend — sync do progresso
 
 ⚠️ **O projeto pausa sozinho.** No plano free o Supabase hiberna depois de ~1
 semana sem uso e volta com `status: INACTIVE`. Consultas falham com timeout ou
 "relation does not exist" enquanto ele restaura. Antes de concluir que algo
 sumiu, cheque o status do projeto.
-Hoje quem limpa o navegador perde o progresso do filho. Necessário antes de
-cobrar assinatura.
-- Auth do responsável + seleção de perfil da criança
+Assinatura e login já estão no banco. **Falta o progresso da criança**: hoje
+quem limpa o navegador perde tudo.
+- Seleção de perfil da criança (o login do responsável já existe)
 - Camada de sync local-first com fila offline
 - Migrar `learning_events` do log local para o banco
-- Ligar o webhook do PagBank e do Stripe na tabela `subscriptions` (ja existe,
-  com indice unico por provedor+referencia para o webhook ser idempotente)
 - Ranking real com convite por código e aprovação dos dois pais
 
 ### 3. Telas restantes contra o mockup
@@ -95,3 +101,27 @@ traz vinte famílias — é canal de aquisição, não só feature.
   Devem sair quando `gn-05` e o arco `gn-27..39` forem escritos.
 - Bundle acima de 500 kB: falta code splitting por rota.
 
+---
+
+## 🔑 Chaves pendentes (bloqueiam produção)
+
+Sem elas o código roda, mas as Functions respondem 503 e o pagamento não sai.
+Cloudflare Pages → `reinoup-app` → Settings → Environment variables:
+
+| Variável | Onde pegar |
+|---|---|
+| `PAGBANK_TOKEN` | Portal do Desenvolvedor → aba Tokens |
+| `PAGBANK_ENV` | `sandbox` ou `production` |
+| `STRIPE_SECRET_KEY` | Stripe → Developers → API keys |
+| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks (após criar o endpoint) |
+| `SUPABASE_URL` | `https://whjfaukvqutgmyozfesb.supabase.co` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → service_role |
+
+⚠️ `SUPABASE_SERVICE_ROLE_KEY` passa por cima do RLS. Nunca no cliente, nunca
+no repositório.
+
+## ⚖️ Decisão pendente do Ramon
+
+Com **1 aula de Gênesis escrita**, o paywall bloqueia quase tudo. Para os
+primeiros pais testarem, talvez valha `exigePlano: false` no bônus
+(`content/seasons.ts`) até Gênesis ter ~10 aulas.
