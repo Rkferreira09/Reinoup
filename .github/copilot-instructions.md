@@ -1,4 +1,4 @@
-# ReinoUp — instruções do repositório
+﻿# ReinoUp — instruções do repositório
 
 App de Bíblia infantil gamificado, em português, para crianças de 5 a 10 anos.
 Posicionamento: *"a Bíblia que seu filho abre sozinho"*. Quem paga é o pai; quem
@@ -106,3 +106,13 @@ daqui que o relatório dos pais nasce — não do estado atual).
 
 Ao escrever SQL: RLS obrigatório, `(select auth.uid())` em vez de chamada por
 linha, índice em toda coluna de FK usada em policy.
+
+## Testar RLS depois de mexer em policy
+
+`supabase/tests/rls-isolamento.sql` — cole no SQL Editor do Supabase. Roda em
+transação com ROLLBACK, não deixa lixo. Prova três coisas: a policy avalia sem
+erro de permissão, uma família não lê os dados de outra, e não escreve neles.
+
+O primeiro item já quebrou uma vez: `revoke execute` na função usada pelas
+policies fazia o próprio pai levar "permission denied for function owns_child".
+Não aparece em build nenhum — só no primeiro login real.
