@@ -1,9 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
 import { Scene } from '../../components/illustrations/Scene';
-import { getStory } from '../../content/stories';
+import { getStory, motivoDeBloqueio } from '../../content/stories';
+import { useAssinatura } from '../../lib/assinatura';
 import { useProgressStore } from '../../store/progressStore';
 
 export function StoryCover() {
@@ -11,9 +12,18 @@ export function StoryCover() {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(false);
   const progress = useProgressStore((s) => (storyId ? s.stories[storyId] : undefined));
+  const stories = useProgressStore((s) => s.stories);
+  const { plano, carregando } = useAssinatura();
 
   const story = storyId ? getStory(storyId) : undefined;
   if (!story) return <Navigate to="/app/historias" replace />;
+
+  // A trava também vive aqui, não só na lista: sem isso, digitar a URL da fase
+  // pularia o paywall e a sequência inteira.
+  const completedIds = new Set(Object.keys(stories).filter((id) => stories[id]?.completed));
+  const bloqueio = motivoDeBloqueio(story, completedIds, Boolean(plano));
+  if (!carregando && bloqueio === 'assinatura') return <Navigate to="/app/planos" replace />;
+  if (bloqueio === 'sequencia') return <Navigate to="/app/historias" replace />;
 
   const nextChapterIndex = Math.min(progress?.chaptersCompleted ?? 0, story.chapters.length - 1);
   const nextChapter = story.chapters[nextChapterIndex];
@@ -60,3 +70,4 @@ export function StoryCover() {
     </div>
   );
 }
+

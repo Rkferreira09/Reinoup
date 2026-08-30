@@ -39,6 +39,17 @@ export function storiesDoBloco(seasonId: SeasonId, blocoId: string): Story[] {
 // ============================================================
 
 /**
+ * Quantas fases o pai experimenta antes de decidir assinar.
+ *
+ * Três é o suficiente para a criança criar vínculo — pegar a mecânica, ganhar
+ * a primeira medalha, começar a ofensiva — e curto o bastante para a decisão
+ * chegar enquanto o interesse está no pico.
+ */
+export const FASES_GRATUITAS = 3;
+
+export type MotivoDeBloqueio = 'sequencia' | 'assinatura';
+
+/**
  * Em temporada sequencial, a fase N+1 abre quando a N é concluída.
  * A primeira fase de cada temporada está sempre aberta.
  */
@@ -51,6 +62,31 @@ export function isStoryUnlocked(story: Story, completedIds: Set<string>): boolea
   if (posicao <= 0) return true;
 
   return completedIds.has(daTemporada[posicao - 1].id);
+}
+
+/**
+ * Por que a fase está fechada — ou `null` se estiver aberta.
+ *
+ * A sequência vem antes da assinatura de propósito: dizer "assine" numa fase
+ * que a criança ainda não alcançou seria cobrar por algo que ela nem veria.
+ */
+export function motivoDeBloqueio(
+  story: Story,
+  completedIds: Set<string>,
+  temPlanoAtivo: boolean
+): MotivoDeBloqueio | null {
+  if (!isStoryUnlocked(story, completedIds)) return 'sequencia';
+
+  if (temPlanoAtivo) return null;
+
+  const season = SEASONS[story.seasonId];
+
+  // Temporada extra é benefício de assinante desde a primeira fase.
+  if (season.exigePlano) return 'assinatura';
+
+  // Temporada principal: degustação das primeiras fases.
+  const posicao = storiesDaTemporada(story.seasonId).findIndex((s) => s.id === story.id);
+  return posicao >= FASES_GRATUITAS ? 'assinatura' : null;
 }
 
 /** A próxima história a jogar: a primeira não concluída, respeitando a ordem. */

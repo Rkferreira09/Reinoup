@@ -1,4 +1,4 @@
-import type { Valor } from './valores';
+﻿import type { Valor } from './valores';
 
 export type { Valor } from './valores';
 
@@ -193,6 +193,14 @@ export interface Season {
   blocos: Bloco[];
   /** Temporada sequencial trava a fase N+1 até concluir a N. */
   sequencial: boolean;
+  /**
+   * Temporada inteira exige plano ativo.
+   *
+   * A temporada principal usa a degustação de FASES_GRATUITAS; conteúdo extra
+   * é benefício de assinante desde a primeira fase. Deixe false durante o
+   * pré-lançamento se quiser tudo aberto para os primeiros pais testarem.
+   */
+  exigePlano: boolean;
 }
 
 // ============================================================
@@ -245,3 +253,6 @@ export interface Plan {
   features: string[];
   highlight?: boolean;
 }
+
+
+

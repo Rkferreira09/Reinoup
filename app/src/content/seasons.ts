@@ -1,4 +1,4 @@
-import type { Season, SeasonId, SensibilidadeTag } from './types';
+﻿import type { Season, SeasonId, SensibilidadeTag } from './types';
 import type { Valor } from './valores';
 
 /**
@@ -17,6 +17,8 @@ export const SEASONS: Record<SeasonId, Season> = {
     livro: 'Gênesis',
     totalPlanejado: 39,
     sequencial: true,
+    // Gênesis usa a degustação: as primeiras fases abrem sem assinatura.
+    exigePlano: false,
     blocos: [
       {
         id: 'gn-b1',
@@ -63,6 +65,8 @@ export const SEASONS: Record<SeasonId, Season> = {
     livro: 'Vários',
     totalPlanejado: 3,
     sequencial: false,
+    // Conteúdo extra é benefício de assinante desde a primeira fase.
+    exigePlano: true,
     blocos: [
       {
         id: 'bonus-b1',
@@ -159,3 +163,4 @@ export const GENESIS_ROADMAP: RoadmapSlot[] = [
 export function roadmapSlot(id: string): RoadmapSlot | undefined {
   return GENESIS_ROADMAP.find((s) => s.id === id);
 }
+

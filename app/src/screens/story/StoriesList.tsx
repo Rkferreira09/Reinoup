@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Card } from '../../components/ui/Card';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 import { Scene } from '../../components/illustrations/Scene';
-import { STORIES_POR_TEMPORADA, isStoryUnlocked } from '../../content/stories';
+import { STORIES_POR_TEMPORADA, motivoDeBloqueio, FASES_GRATUITAS } from '../../content/stories';
+import { BrandIcon } from '../../components/illustrations/BrandIcon';
+import { useAssinatura } from '../../lib/assinatura';
 import { SEASONS, SEASON_ORDER } from '../../content/seasons';
 import { VALORES } from '../../content/valores';
 import { useProgressStore } from '../../store/progressStore';
@@ -11,6 +13,7 @@ import { useProgressStore } from '../../store/progressStore';
 export function StoriesList() {
   const stories = useProgressStore((s) => s.stories);
   const completedIds = new Set(Object.keys(stories).filter((id) => stories[id]?.completed));
+  const { plano } = useAssinatura();
 
   return (
     <div className="flex min-h-screen flex-col bg-cream pb-6">
@@ -47,7 +50,8 @@ export function StoriesList() {
                     {doBloco.map((story) => {
                       const progress = stories[story.id];
                       const pct = (progress?.chaptersCompleted ?? 0) / story.chapters.length;
-                      const unlocked = isStoryUnlocked(story, completedIds);
+                      const bloqueio = motivoDeBloqueio(story, completedIds, Boolean(plano));
+                      const unlocked = bloqueio === null;
                       const valor = VALORES[story.valor];
 
                       const card = (
@@ -74,13 +78,25 @@ export function StoriesList() {
                               </span>
                             )}
 
-                            {!unlocked && (
+                            {bloqueio === 'sequencia' && (
                               <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-navy-deep/70 backdrop-blur-[2px]">
                                 <span className="text-3xl" aria-hidden>
                                   🔒
                                 </span>
                                 <span className="font-display text-xs font-bold text-white/90">
                                   Conclua a fase anterior
+                                </span>
+                              </div>
+                            )}
+
+                            {bloqueio === 'assinatura' && (
+                              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-navy-deep/75 px-4 text-center backdrop-blur-[2px]">
+                                <BrandIcon name="ranking" size={30} />
+                                <span className="font-display text-sm font-bold leading-tight text-white">
+                                  Continue a jornada
+                                </span>
+                                <span className="text-[11px] font-semibold leading-snug text-white/70">
+                                  As {FASES_GRATUITAS} primeiras são livres. Assine para abrir o resto.
                                 </span>
                               </div>
                             )}
@@ -104,11 +120,25 @@ export function StoriesList() {
                         </Card>
                       );
 
-                      return unlocked ? (
-                        <Link key={story.id} to={`/app/historia/${story.id}`}>
-                          {card}
-                        </Link>
-                      ) : (
+                      if (unlocked) {
+                        return (
+                          <Link key={story.id} to={`/app/historia/${story.id}`}>
+                            {card}
+                          </Link>
+                        );
+                      }
+
+                      // Bloqueio por assinatura leva aos Planos: cadeado mudo
+                      // não converte, e o pai precisa saber o que fazer.
+                      if (bloqueio === 'assinatura') {
+                        return (
+                          <Link key={story.id} to="/app/planos">
+                            {card}
+                          </Link>
+                        );
+                      }
+
+                      return (
                         <div key={story.id} aria-disabled className="opacity-70">
                           {card}
                         </div>
@@ -124,3 +154,5 @@ export function StoriesList() {
     </div>
   );
 }
+
+
