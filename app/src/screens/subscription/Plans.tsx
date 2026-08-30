@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { TopBar } from '../../components/ui/TopBar';
 import { Button } from '../../components/ui/Button';
@@ -6,6 +6,8 @@ import { Modal } from '../../components/ui/Modal';
 import { MascotOficial } from '../../components/mascot/MascotOficial';
 import { PLANS, ANNUAL_DISCOUNT } from '../../content/plans';
 import { useSettingsStore } from '../../store/settingsStore';
+import { useAuthStore } from '../../store/authStore';
+import { CheckoutPix } from './CheckoutPix';
 
 export function Plans() {
   const navigate = useNavigate();
@@ -17,6 +19,8 @@ export function Plans() {
   const [confirmed, setConfirmed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [pixAberto, setPixAberto] = useState(false);
+  const emailDaConta = useAuthStore((s) => s.email) ?? '';
 
   // Volta do Stripe Checkout: ?status=success confirma a assinatura de verdade;
   // ?status=cancelled só limpa a URL (o usuário desistiu no meio do pagamento).
@@ -110,13 +114,32 @@ export function Plans() {
         </div>
 
         <Button full size="lg" className="mt-6" onClick={handleSubscribe} disabled={loading}>
-          {loading ? 'Abrindo pagamento...' : 'Assinar agora'}
+          {loading ? 'Abrindo pagamento...' : 'Assinar com cartão'}
         </Button>
+
+        {/* PIX é como o pai brasileiro paga: cai na hora e sem taxa de cartão. */}
+        <button
+          onClick={() => setPixAberto(true)}
+          className="mt-3 w-full rounded-pill border-2 border-navy/15 bg-white py-3.5 font-display text-base font-bold text-navy active:translate-y-[2px]"
+        >
+          Pagar com PIX
+        </button>
+
         {error && <p className="mt-3 text-center text-sm font-semibold text-red-soft">{error}</p>}
         <p className="mt-3 text-center text-xs text-navy/40">
-          Pagamento seguro via Stripe. Cartão e Pix aceitos.
+          Cartão via Stripe · PIX via PagBank. Pagamento seguro.
         </p>
       </div>
+
+      <CheckoutPix
+        aberto={pixAberto}
+        planId={selected}
+        planNome={PLANS.find((p) => p.id === selected)?.name ?? ''}
+        cycle={cycle}
+        valorFormatado={priceFor(PLANS.find((p) => p.id === selected)?.monthlyPrice ?? 0)}
+        emailPadrao={emailDaConta}
+        onFechar={() => setPixAberto(false)}
+      />
 
       <Modal open={confirmed} onClose={() => setConfirmed(false)}>
         <div className="flex flex-col items-center gap-3 text-center">
@@ -139,3 +162,4 @@ export function Plans() {
     </div>
   );
 }
+
