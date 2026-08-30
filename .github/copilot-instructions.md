@@ -92,17 +92,26 @@ personagens do quiz. Enquanto isso, `Scene` e `MotifIcon` (vetor) cobrem.
 
 ## Backend
 
-Supabase `whjfaukvqutgmyozfesb` (us-east-2). Migration `reinoup_base_schema`
-aplicada com RLS forçado. **Ainda não está conectado ao app** — o progresso vive
-em `localStorage` via `zustand/persist`.
+Supabase `whjfaukvqutgmyozfesb` (us-east-2), com RLS forçado em todas as tabelas.
+**Conectado ao app**: login do responsável, assinatura e sync do progresso.
+
+O sync é local-first (`lib/sync.ts`): o `zustand/persist` segue como fonte
+durante o uso e o servidor é espelho, com envio debounced e last-write-wins por
+`client_updated_at`. Sem as `VITE_SUPABASE_*` o app roda 100% local e nada quebra
+— por isso elas estão versionadas em `app/.env.production` (a publishable key é
+pública por design; quem protege os dados é o RLS).
+
+⚠️ **O projeto free hiberna** depois de ~1 semana parado e volta como
+`INACTIVE`. Durante o `RESTORING` as consultas falham com timeout ou
+"relation does not exist" — parece perda de schema e não é.
 
 Modelo: **o pai é o titular da conta** (`auth.users`); **a criança é um perfil**,
 nunca um usuário. Resolve LGPD, perfis múltiplos e impede a criança de comprar
 ou cancelar.
 
-Tabelas: `families` · `child_profiles` · `child_progress` (espelho do estado,
-last-write-wins por `client_updated_at`) · `learning_events` (append-only, é
-daqui que o relatório dos pais nasce — não do estado atual).
+Tabelas: `families` · `child_profiles` · `child_progress` (espelho do estado) ·
+`learning_events` (append-only, é daqui que o relatório dos pais nasce — não do
+estado atual) · `subscriptions` (escrita só pelos webhooks, com `service_role`).
 
 Ao escrever SQL: RLS obrigatório, `(select auth.uid())` em vez de chamada por
 linha, índice em toda coluna de FK usada em policy.
