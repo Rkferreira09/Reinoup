@@ -1,0 +1,14 @@
+# Configuração do Cloudflare Pages no repositório.
+#
+# Por que existe: as Pages Functions em `functions/` nunca subiram — todo POST
+# em /api/* respondia 405, que é o erro de POST em arquivo estático. Sem este
+# arquivo, a descoberta da pasta `functions/` depende do "Root directory" e do
+# "Build output directory" configurados no painel, e qualquer divergência entre
+# os dois faz o Cloudflare publicar só o site e ignorar as Functions em silêncio.
+#
+# Com wrangler.toml, o Cloudflare usa esta configuração e procura `functions/`
+# ao lado dele — que é exatamente onde ela está.
+
+name = "reinoup-app"
+compatibility_date = "2025-04-01"
+pages_build_output_dir = "dist"
