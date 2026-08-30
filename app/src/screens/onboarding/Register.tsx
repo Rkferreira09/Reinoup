@@ -31,6 +31,15 @@ export function Register() {
         return setError(remoto.error ?? 'Não foi possível criar a conta.');
       }
       setFamilyId(remoto.familyId ?? null);
+
+      // Sem sessão, o RLS barra tudo: o pai entraria e não veria a própria
+      // assinatura. Melhor parar aqui e dizer o que falta.
+      if (remoto.precisaConfirmarEmail) {
+        setEnviando(false);
+        return setError(
+          'Conta criada! Confirme o e-mail que enviamos para você e depois entre com sua senha.'
+        );
+      }
     }
 
     const result = register(email, password);

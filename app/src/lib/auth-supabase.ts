@@ -17,6 +17,14 @@ export interface ResultadoAuth {
   ok: boolean;
   /** id do usuário no Supabase — é o mesmo `family_id` das tabelas. */
   familyId?: string;
+  /**
+   * Conta criada, mas sem sessão: o projeto exige confirmação de e-mail.
+   *
+   * Sem sessão o RLS barra toda consulta, então o pai entraria e não veria a
+   * própria assinatura — parecendo que o pagamento sumiu. Precisa ser dito na
+   * tela, não engolido.
+   */
+  precisaConfirmarEmail?: boolean;
   error?: string;
 }
 
@@ -43,7 +51,11 @@ export async function cadastrarResponsavel(email: string, senha: string): Promis
   if (error) return { ok: false, error: traduzirErro(error.message) };
 
   // O trigger `on_auth_user_created` cria a linha em `families` sozinho.
-  return { ok: true, familyId: data.user?.id };
+  return {
+    ok: true,
+    familyId: data.user?.id,
+    precisaConfirmarEmail: !data.session,
+  };
 }
 
 export async function entrarComoResponsavel(email: string, senha: string): Promise<ResultadoAuth> {
