@@ -297,6 +297,24 @@ export const VERSES: Verse[] = [
       '8-10': 'No princípio, Deus criou os céus e a terra.',
     },
   },
+  {
+    id: 'v-gn-02',
+    reference: 'Gênesis 3:9',
+    category: 'obediencia',
+    text: {
+      '5-7': 'Deus chamou o homem e perguntou: “Onde você está?”',
+      '8-10': 'O Senhor Deus chamou o homem e perguntou: “Onde você está?”',
+    },
+  },
+  {
+    id: 'v-gn-03',
+    reference: 'Gênesis 4:7',
+    category: 'obediencia',
+    text: {
+      '5-7': 'O pecado quer dominar você, mas você pode vencê-lo.',
+      '8-10': 'O pecado está à porta e deseja dominar você, mas você deve vencê-lo.',
+    },
+  },
 ];
 
 export function getVerse(id: string): Verse | undefined {

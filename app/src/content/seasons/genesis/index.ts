@@ -1,6 +1,8 @@
 import type { Story } from '../../types';
 import { GENESIS_ROADMAP } from '../../seasons';
 import { gn01Criacao } from './01-criacao';
+import { gn02AdaoEva } from './02-adao-eva';
+import { gn03CaimAbel } from './03-caim-abel';
 
 /**
  * Temporada 1 — Gênesis: Deus estava lá.
@@ -10,8 +12,8 @@ import { gn01Criacao } from './01-criacao';
  */
 export const GENESIS_STORIES: Story[] = [
   gn01Criacao,
-  // gn-02-adao-eva
-  // gn-03-caim-abel
+  gn02AdaoEva,
+  gn03CaimAbel,
   // ... até gn-39-perdao-ate-o-fim
 ].sort((a, b) => a.order - b.order);
 
