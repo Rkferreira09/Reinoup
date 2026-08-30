@@ -62,7 +62,7 @@ export const gn03CaimAbel: Story = {
           'Então Caim chamou Abel para ir ao campo. Ali, Caim machucou o irmão, e Abel morreu. Foi uma escolha terrível. A raiva não cuidada trouxe uma tristeza enorme.',
         ],
         '8-10': [
-          'Caim tinha muitas opções. Poderia reconhecer sua raiva, conversar com Deus, pedir ajuda aos pais ou aprender com Abel. Em vez disso, alimentou o ciúme e planejou ferir o irmão. Uma emoção forte não obrigava Caim a agir; ele continuava responsável pela escolha que faria naquele momento.',
+          'Caim tinha muitas opções. Poderia reconhecer sua raiva, conversar com Deus, pedir ajuda aos pais ou aprender com Abel. Em vez disso, alimentou o ciúme e planejou ferir o próprio irmão. Uma emoção forte não obrigava Caim a agir; ele continuava responsável pela escolha que faria naquele momento tão difícil.',
           'Caim chamou Abel para o campo. Longe de casa, atacou o irmão e o matou. A Bíblia nomeia essa morte sem transformá-la em espetáculo. Abel perdeu a vida, sua família sofreu, e Caim não poderia desfazer sua ação. A escolha foi terrível — e Deus viu o que havia acontecido.',
         ],
       },
@@ -107,7 +107,7 @@ export const gn03CaimAbel: Story = {
           'Você pode parar, respirar e contar o que sente. Pode chamar um adulto e orar. Deus ajuda você a escolher o bem. Ninguém precisa enfrentar a raiva sozinho.',
         ],
         '8-10': [
-          'A história de Caim e Abel é triste, mas nos entrega um aviso muito importante: emoções fortes precisam ser ouvidas e cuidadas antes de virarem ações. Sentir raiva não torna alguém mau. Porém, usar a raiva como desculpa para ferir outra pessoa é uma escolha errada e traz consequências.',
+          'A história de Caim e Abel é triste, mas nos entrega um aviso muito importante: emoções fortes precisam ser ouvidas e cuidadas antes de virarem ações. Sentir raiva não torna alguém mau. Porém, usar a raiva como desculpa para ferir outra pessoa é uma escolha muito errada e traz consequências.',
           'Quando a raiva crescer, pare e se afaste antes de agir. Respire devagar, dê nome ao que sente e procure um adulto de confiança. Conte a verdade e peça ajuda a Deus. Ele nos dá caminhos para escolher o bem. A raiva pode bater à porta, mas não precisa entrar e assumir o controle.',
         ],
       },

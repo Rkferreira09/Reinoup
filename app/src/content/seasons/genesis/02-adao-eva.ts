@@ -76,7 +76,7 @@ export const gn02AdaoEva: Story = {
           'Adão culpou Eva. Eva culpou a serpente. Eles tinham errado e precisavam contar a verdade. Deus mostrou que toda escolha traz consequências. O que aconteceria com eles?',
         ],
         '8-10': [
-          'Deus chamou Adão: “Onde você está?” Ele não havia perdido Adão entre as árvores daquele grande jardim. A pergunta era um convite para sair do esconderijo e contar a verdade. Adão respondeu que sentira medo. Quando Deus perguntou sobre o fruto, Adão culpou Eva, e Eva culpou a serpente.',
+          'Deus chamou Adão: “Onde você está?” Ele não havia perdido Adão entre as árvores daquele grande jardim. A pergunta era um convite para sair do esconderijo e contar toda a verdade. Adão respondeu que sentira medo. Quando Deus perguntou sobre o fruto, Adão culpou Eva, e Eva culpou a serpente.',
           'Deus ouviu todos e mostrou que a desobediência teria consequências reais. A serpente foi julgada, a vida se tornaria difícil e o jardim já não poderia continuar como antes. Ainda assim, Deus não deixou de falar com eles nem de cuidar deles. Antes de explicar sua saída, fez roupas para protegê-los.',
         ],
       },
