@@ -1,4 +1,4 @@
-# Copie para .dev.vars ao testar as Pages Functions localmente com
+﻿# Copie para .dev.vars ao testar as Pages Functions localmente com
 # `bunx wrangler pages dev` (não é o `bun run dev` normal — esse é só o
 # Vite, que não roda /api/*). Em produção, configure as MESMAS chaves em:
 # Cloudflare Pages → seu projeto → Settings → Environment variables.
@@ -12,3 +12,17 @@ STRIPE_SECRET_KEY=
 # "Signing secret" mostrado ao criar o webhook em
 # Dashboard → Developers → Webhooks → seu endpoint.
 STRIPE_WEBHOOK_SECRET=
+
+# ---------------------------------------------------------------------------
+# PagBank — meio de pagamento brasileiro (PIX). Complementa o Stripe, que
+# atende cartão internacional mas nao cobre bem PIX e boleto.
+# ---------------------------------------------------------------------------
+
+# Sandbox: Portal do Desenvolvedor -> aba Tokens.
+# Producao: PagBank -> Vendas -> Integracoes -> Gerar Token.
+PAGBANK_TOKEN=
+
+# 'sandbox' (padrao) ou 'production'. Define a base da API:
+#   sandbox    -> https://sandbox.api.pagseguro.com
+#   production -> https://api.pagseguro.com
+PAGBANK_ENV=sandbox
