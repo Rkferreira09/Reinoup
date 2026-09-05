@@ -70,6 +70,7 @@ export function Profile() {
       <ConquistasVitrine badgesUnlocked={badgesUnlocked} />
 
       <div className="flex flex-col gap-3">
+        <LinhaDoPerfil to="/app/oracoes" icone="fe" titulo="Diário de Orações" />
         <LinhaDoPerfil to="/app/ranking" icone="ranking" titulo="Ranking de amigos" />
         <LinhaDoPerfil to="/app/album-adesivos" icone="recompensas" titulo="Álbum de adesivos" />
         <LinhaDoPerfil to="/app/planos" icone="desafios" titulo="Planos" />

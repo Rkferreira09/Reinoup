@@ -8,6 +8,7 @@ import { MISSIONS } from '../../content/missions';
 import { lockParentArea } from '../../lib/parent-session';
 
 const MENU = [
+  { to: '/pais/voz-da-familia', label: 'Voz da Família', icon: '🎙️' },
   { to: '/pais/relatorio', label: 'Relatório de atividades', icon: '📋' },
   { to: '/pais/conteudo', label: 'Gerenciar conteúdo', icon: '💬' },
   { to: '/pais/tempo-de-uso', label: 'Tempo de uso', icon: '⏱️' },

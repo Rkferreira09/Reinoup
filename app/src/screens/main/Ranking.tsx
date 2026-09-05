@@ -54,8 +54,11 @@ export function Ranking() {
         ))}
 
         <Card className="mt-2 text-center">
-          <p className="font-display font-bold text-navy">Modo Turma</p>
-          <p className="mt-1 text-sm text-navy/60">Compartilhe o código com sua turma da igreja para todos jogarem juntos.</p>
+          <p className="font-display font-bold text-navy">Modo Turma (prévia)</p>
+          <p className="mt-1 text-sm text-navy/60">
+            Por enquanto o ranking usa amigos de exemplo, só para treinar. Em breve você vai poder convidar a turma de
+            verdade da sua igreja com este código.
+          </p>
           <button onClick={copyCode} className="mt-3 rounded-xl bg-navy px-4 py-2 font-display font-bold text-white">
             {copied ? 'Copiado! ✓' : `Código: ${friends.classCode}`}
           </button>

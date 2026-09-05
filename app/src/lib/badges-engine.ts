@@ -27,6 +27,8 @@ export function evaluateQualifyingBadges(state: ProgressState): string[] {
 
   if (state.usedBeforeSevenAm) unlocked.add('early-bird');
 
+  if (state.familyVoiceUsed) unlocked.add('family-voice');
+
   return Array.from(unlocked);
 }
 

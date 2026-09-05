@@ -18,6 +18,7 @@ export const AVATAR_ITEMS: AvatarItem[] = [
   { id: 'outfit-vermelho', kind: 'outfit', label: 'Manto Vermelho', value: '#B3432B', unlock: { type: 'coins', cost: 40 } },
   { id: 'outfit-roxo', kind: 'outfit', label: 'Manto Roxo', value: '#5B3A8E', unlock: { type: 'coins', cost: 55 } },
   { id: 'outfit-dourado', kind: 'outfit', label: 'Manto Dourado do Reino', value: '#C9971F', unlock: { type: 'badge', badgeId: 'old-testament-complete' } },
+  { id: 'outfit-familia', kind: 'outfit', label: 'Manto da Voz de Casa', value: '#7A4B2E', unlock: { type: 'badge', badgeId: 'family-voice' } },
 
   // accessories
   { id: 'acc-nenhum', kind: 'accessory', label: 'Nenhum', value: 'none', unlock: { type: 'free' } },

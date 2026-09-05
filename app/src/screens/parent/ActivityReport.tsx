@@ -2,11 +2,13 @@ import { useMemo, useState } from 'react';
 import { TopBar } from '../../components/ui/TopBar';
 import { Card } from '../../components/ui/Card';
 import { useProgressStore } from '../../store/progressStore';
+import { usePrayerStore, countPrayersInDates } from '../../store/prayerStore';
 import { currentWeekDates, addDays, weekdayLabel, minutesToLabel } from '../../lib/dates';
 
 export function ActivityReport() {
   const activityLog = useProgressStore((s) => s.activityLog);
   const activityMinutes = useProgressStore((s) => s.activityMinutes);
+  const prayerEntries = usePrayerStore((s) => s.entries);
   const [weekOffset, setWeekOffset] = useState(0);
 
   const weekDates = useMemo(() => currentWeekDates(addDays(new Date(), weekOffset * 7)), [weekOffset]);
@@ -16,6 +18,7 @@ export function ActivityReport() {
   const historias = entriesThisWeek.filter((e) => e.kind === 'historia').length;
   const quizzes = entriesThisWeek.filter((e) => e.kind === 'quiz').length;
   const versiculos = entriesThisWeek.filter((e) => e.kind === 'versiculo').length;
+  const oracoes = countPrayersInDates(prayerEntries, weekSet);
 
   const totalMinutes = weekDates.reduce((sum, d) => sum + (activityMinutes[d] ?? 0), 0);
   const maxMinutes = Math.max(1, ...weekDates.map((d) => activityMinutes[d] ?? 0));
@@ -47,6 +50,21 @@ export function ActivityReport() {
             <div>
               <p className="font-display text-2xl font-extrabold text-navy">{versiculos}</p>
               <p className="text-xs font-semibold text-navy/50">Versículos</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <p className="font-display mb-1 font-bold text-navy">Diário de Orações</p>
+          <p className="mb-3 text-xs text-navy/50">A dimensão do coração — não é sobre pontuação.</p>
+          <div className="grid grid-cols-2 divide-x divide-navy/10 text-center">
+            <div>
+              <p className="font-display text-2xl font-extrabold text-navy">{oracoes.logged}</p>
+              <p className="text-xs font-semibold text-navy/50">Pedidos registrados</p>
+            </div>
+            <div>
+              <p className="font-display text-2xl font-extrabold text-green-dark">{oracoes.answered}</p>
+              <p className="text-xs font-semibold text-navy/50">"Deus respondeu!"</p>
             </div>
           </div>
         </Card>

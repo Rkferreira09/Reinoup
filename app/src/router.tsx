@@ -18,6 +18,7 @@ import { Profile } from './screens/main/Profile';
 import { Avatar } from './screens/main/Avatar';
 import { Ranking } from './screens/main/Ranking';
 import { FinalCelebration } from './screens/main/FinalCelebration';
+import { PrayerJournal } from './screens/main/PrayerJournal';
 
 import { StoriesList } from './screens/story/StoriesList';
 import { StoryCover } from './screens/story/StoryCover';
@@ -41,6 +42,7 @@ import { ManageContent } from './screens/parent/ManageContent';
 import { ScreenTime } from './screens/parent/ScreenTime';
 import { Notifications } from './screens/parent/Notifications';
 import { Settings } from './screens/parent/Settings';
+import { VoiceRecordings } from './screens/parent/VoiceRecordings';
 
 export const router = createBrowserRouter([
   { path: '/', element: <Splash /> },
@@ -78,6 +80,7 @@ export const router = createBrowserRouter([
       { path: 'jogos/caca-palavras', element: <WordSearchGame /> },
 
       { path: 'ranking', element: <Ranking /> },
+      { path: 'oracoes', element: <PrayerJournal /> },
       { path: 'perfil', element: <Profile /> },
       { path: 'avatar', element: <Avatar /> },
 
@@ -92,6 +95,7 @@ export const router = createBrowserRouter([
     element: <ParentGuard />,
     children: [
       { index: true, element: <ParentHome /> },
+      { path: 'voz-da-familia', element: <VoiceRecordings /> },
       { path: 'relatorio', element: <ActivityReport /> },
       { path: 'conteudo', element: <ManageContent /> },
       { path: 'tempo-de-uso', element: <ScreenTime /> },

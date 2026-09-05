@@ -12,7 +12,7 @@ export const PLANS: Plan[] = [
     name: 'Completo',
     monthlyPrice: 19.9,
     highlight: true,
-    features: ['Tudo do Essencial', 'Jogos ilimitados', 'Missões exclusivas', 'Relatórios dos pais', 'Avatares exclusivos'],
+    features: ['Tudo do Essencial', 'Jogos ilimitados', 'Missões exclusivas', 'Relatórios dos pais', 'Avatares exclusivos', 'Narração com a voz da família'],
   },
   {
     id: 'familia',

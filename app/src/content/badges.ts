@@ -13,6 +13,8 @@ export const BADGES: Badge[] = [
   { id: 'verse-master-20', name: '20 Versículos Decorados', description: 'Decorou 20 versículos.', category: 'dominio', icon: '📜' },
   { id: 'quiz-master', name: 'Quiz Master', description: 'Acertou pelo menos 80% em 10 quizzes.', category: 'dominio', icon: '🧠' },
 
+  { id: 'family-voice', name: 'Voz de Casa', description: 'Ouviu uma história narrada pela voz de alguém da família.', category: 'carater', icon: '🎙️' },
+
   { id: 'generous-heart', name: 'Coração Generoso', description: 'Completou uma missão de ajudar alguém.', category: 'carater', icon: '❤️' },
   { id: 'faithful-friend', name: 'Amigo Fiel', description: 'Completou uma missão de orar por um amigo.', category: 'carater', icon: '🤝' },
   { id: 'forgiveness-in-action', name: 'Perdão em Ação', description: 'Completou uma missão de perdoar alguém.', category: 'carater', icon: '🕊️' },

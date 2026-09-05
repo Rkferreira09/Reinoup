@@ -23,6 +23,7 @@ import {
   GAME_WIN_XP,
   SHIELD_COST_COINS,
   STREAK_MILESTONE_BONUS,
+  MISSION_VIDA_REAL_APPROVAL_BONUS_XP,
   rollChestReward,
 } from '../lib/economy';
 import { badgeGrantedItems } from '../content/avatar-items';
@@ -64,6 +65,9 @@ interface ProgressActions {
   recordGameWin: (label: string) => void;
   addActivityMinutes: (minutes: number) => void;
 
+  /** Chamado quando a criança termina de ouvir a narração gravada por alguém da família (ver `familyVoiceStore`). */
+  markFamilyVoiceUsed: () => void;
+
   purchaseAvatarItem: (itemId: string, cost: number) => boolean;
   equipAvatarItem: (kind: 'outfit' | 'accessory' | 'background', itemId: string) => void;
 
@@ -98,6 +102,7 @@ const initialState: ProgressState = {
   },
   weeklyXp: { weekKey: weekKey(), xp: 0 },
   usedBeforeSevenAm: false,
+  familyVoiceUsed: false,
   toasts: [],
 };
 
@@ -303,7 +308,8 @@ export const useProgressStore = create<Store>()(
           set((s) => ({ missions: { ...s.missions, [missionId]: { completed: true, pendingParentConfirm: false, completedDate: todayKey() } } }));
           if (mission) {
             get().addCoins(mission.reward.coins);
-            get().addXp(mission.reward.xp);
+            // Bônus extra por ser confirmado por um adulto — reforça que a missão aconteceu de verdade, fora do app.
+            get().addXp(mission.reward.xp + MISSION_VIDA_REAL_APPROVAL_BONUS_XP);
           }
           logActivity('missao', mission?.title ?? missionId);
           checkBadges();
@@ -340,6 +346,12 @@ export const useProgressStore = create<Store>()(
         addActivityMinutes: (minutes) => {
           const today = todayKey();
           set((s) => ({ activityMinutes: { ...s.activityMinutes, [today]: (s.activityMinutes[today] ?? 0) + minutes } }));
+        },
+
+        markFamilyVoiceUsed: () => {
+          if (get().familyVoiceUsed) return;
+          set({ familyVoiceUsed: true });
+          checkBadges();
         },
 
         purchaseAvatarItem: (_itemId, cost) => {

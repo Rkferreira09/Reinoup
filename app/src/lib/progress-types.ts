@@ -73,5 +73,7 @@ export interface ProgressState {
   avatar: AvatarState;
   weeklyXp: { weekKey: string; xp: number };
   usedBeforeSevenAm: boolean;
+  /** Já ouviu ao menos uma vez uma narração gravada pela família (ver `familyVoiceStore`). */
+  familyVoiceUsed: boolean;
   toasts: ToastItem[];
 }

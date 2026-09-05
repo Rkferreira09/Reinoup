@@ -11,18 +11,22 @@ import { getStory, pagesForAge } from '../../content/stories';
 import { useProgressStore } from '../../store/progressStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { useSpeech } from '../../hooks/useSpeech';
+import { FamilyVoicePlayer } from '../../components/story/FamilyVoicePlayer';
+import { useFamilyVoiceStore } from '../../store/familyVoiceStore';
 
 export function ChapterReader() {
   const { storyId, chapterIndex: chapterIndexParam } = useParams<{ storyId: string; chapterIndex: string }>();
   const navigate = useNavigate();
   const completeChapter = useProgressStore((s) => s.completeChapter);
   const recordChoice = useProgressStore((s) => s.recordChoice);
+  const markFamilyVoiceUsed = useProgressStore((s) => s.markFamilyVoiceUsed);
   const { speak, stop, speaking } = useSpeech();
   const ageBand = useSettingsStore((s) => s.ageBand);
 
   const story = storyId ? getStory(storyId) : undefined;
   const chapterIndex = Number(chapterIndexParam ?? 0);
   const chapter = story?.chapters[chapterIndex];
+  const hasFamilyVoice = useFamilyVoiceStore((s) => (storyId && chapter ? s.hasRecording(storyId, chapter.id) : false));
 
   const [pageIndex, setPageIndex] = useState(0);
   const [choiceIndex, setChoiceIndex] = useState<number | null>(null);
@@ -65,6 +69,12 @@ export function ChapterReader() {
       <div className="px-4">
         <ProgressBar value={overallProgress} color="var(--color-green)" />
       </div>
+
+      {hasFamilyVoice && storyId && (
+        <div className="px-4 pt-3">
+          <FamilyVoicePlayer storyId={storyId} chapterId={chapter.id} onFinished={markFamilyVoiceUsed} />
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col px-4 pt-4">
         <AnimatePresence mode="wait">
